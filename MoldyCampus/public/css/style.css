@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #0f0f0f;
+    color: #fff;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-bottom: 2px solid #fff;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+}
+
+header ul li {
+    margin: 0 15px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.auth-buttons a {
+    margin-right: 20px;
+    color: #fff;
+}
+
+.auth-buttons input {
+    padding: 5px;
+    padding-left: 10px;
+    background-color: #333;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 0 auto;
+    float: center;
+    max-width: 1700px;
+    padding: 20px;
+}
+
+.notation{
+    font-size: auto;
+    display: flex;
+    max-width: 50;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 10px;
+    margin: 10px;
+}
+
+.carousel{
+    position:relative;
+    width: 50%;
+    margin-left: 10px;
+    margin-top: 20px ;
+}
+
+.carousel img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: none;
+    box-shadow: 2rem 2rem 7rem 0.1rem hsla(0, 0%, 100%, 0.247);
+    border-radius: 0.5rem;
+}
+
+img.displaySlide {
+  display: block;
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+
+@keyframes fade {
+    
+    from{opacity: .3;}
+    to{opacity: 1;}
+}
+
+.carousel button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    font-size: 1.5rem;
+    padding: 10px 10px;
+    background-color: #00000000;
+    border: none;
+}
+
+.prev:hover{
+    background-color: #0f0f0f4d;
+}
+
+.prev{
+    left: 0;
+}
+
+.next:hover{
+    background-color: #0f0f0f4d;
+}
+
+.next{
+    right: 0;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #1f1f1f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #383838;
+}
+
+.featured-courses, .top-professors {
+    padding: 50px 0;
+    text-align: center;
+}
+
+
+.courses-grid, .professor-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+.course, .professor {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    position: relative;
+    transition: background 0.4s ease;
+    overflow: hidden;
+    
+}
+
+.course:hover{
+    background-color: #383838;
+}
+
+.professor:hover{
+    background-color: #383838;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #1f1f1f;
+}
