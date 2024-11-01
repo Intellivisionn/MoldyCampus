@@ -9,7 +9,7 @@ class Professors extends Component
 {
     public $category = 'top_rated';
     public $currentPage = 1;
-    public $itemsPerPage = 2;
+    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
 
     public function setCategory($category)
     {

@@ -9,7 +9,7 @@ class Courses extends Component
 {
     public $category = 'trending';
     public $currentPage = 1;
-    public $itemsPerPage = 4;
+    public $itemsPerPage = 3; //need to figure out how to set this from screensize later
 
     public function setCategory($category)
     {
