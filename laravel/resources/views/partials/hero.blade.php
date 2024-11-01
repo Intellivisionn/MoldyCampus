@@ -10,7 +10,6 @@
             <div class="carousel-item">
                 <img src="{{ asset('images/homepage/campus2.jpg') }}" class="d-block img-fluid rounded hero-image" alt="Campus Image">
             </div>
-            <!-- Add more carousel items here if needed -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,14 +23,7 @@
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <!-- Add more indicators here if you have more carousel items -->
         </div>
     </div>
-    <div class="d-flex justify-content-center mt-3">
-        <button class="btn btn-outline-secondary me-2">Trending Now</button>
-        <button class="btn btn-outline-secondary me-2">Newly Added</button>
-        <button class="btn btn-outline-secondary me-2">Top Rated</button>
-        <button class="btn btn-outline-secondary me-2">Most Popular</button>
-        <button class="btn btn-outline-secondary">Recently Reviewed</button>
-    </div>
+    @livewire('courses')
 </section>
