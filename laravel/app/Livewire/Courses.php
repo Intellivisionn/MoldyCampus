@@ -48,30 +48,30 @@ class Courses extends Component
         // Replace this with actual logic to fetch courses by category
         $allCourses = [
             'trending' => collect([
-                ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'economics.jpg'],
-                ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'biology.jpg'],
-                ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'psychology.jpg'],
-                ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'sociology.jpg'],
-                ['title' => 'History', 'code' => 'HIST 101', 'image' => 'history.jpg'],
-                ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'philosophy.jpg'],
-                ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'math.jpg'],
-                ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'physics.jpg'],
+            ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'no-image.jpg'],
+            ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'no-image.jpg'],
+            ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'no-image.jpg'],
+            ['title' => 'History', 'code' => 'HIST 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'no-image.jpg'],
+            ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'no-image.jpg'],
             ]),
             'newly_added' => collect([
-                ['title' => 'Computer Science', 'code' => 'CSCI 101', 'image' => 'cs.jpg'],
-                ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'philosophy.jpg'],
+            ['title' => 'Computer Science', 'code' => 'CSCI 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'no-image.jpg'],
             ]),
             'top_rated' => collect([
-                ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'math.jpg'],
-                ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'physics.jpg'],
+            ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'no-image.jpg'],
             ]),
             'most_popular' => collect([
-                ['title' => 'Chemistry', 'code' => 'CHEM 101', 'image' => 'chemistry.jpg'],
-                ['title' => 'History', 'code' => 'HIST 101', 'image' => 'history.jpg'],
+            ['title' => 'Chemistry', 'code' => 'CHEM 101', 'image' => 'no-image.jpg'],
+            ['title' => 'History', 'code' => 'HIST 101', 'image' => 'no-image.jpg'],
             ]),
             'recently_reviewed' => collect([
-                ['title' => 'Literature', 'code' => 'LIT 101', 'image' => 'literature.jpg'],
-                ['title' => 'Art', 'code' => 'ART 101', 'image' => 'art.jpg'],
+            ['title' => 'Literature', 'code' => 'LIT 101', 'image' => 'no-image.jpg'],
+            ['title' => 'Art', 'code' => 'ART 101', 'image' => 'no-image.jpg'],
             ]),
         ];
 

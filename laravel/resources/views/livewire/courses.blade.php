@@ -22,7 +22,7 @@
                 @foreach($courses->forPage($currentPage, $itemsPerPage) as $course)
                     <div class="course-card text-center mx-2 mb-3">
                         <div class="card h-100 shadow-sm border-0">
-                            <img src="{{ asset('images/' . $course['image']) }}" class="card-img-top img-fluid" alt="{{ $course['title'] }}" style="object-fit: cover; height: 200px;">
+                            <img src="{{ asset('images/courses/' . $course['image']) }}" class="card-img-top img-fluid" alt="{{ $course['title'] }}" style="object-fit: cover; height: 200px;">
                             <div class="card-body d-flex flex-column justify-content-between text-center">
                                 <h5 class="card-title text-truncate" style="max-width: 30ch;">{{ $course['title'] }}</h5>
                                 <p class="card-text">{{ $course['code'] }}</p>
