@@ -21,7 +21,7 @@
                 @foreach($professors->forPage($currentPage, $itemsPerPage) as $professor)
                     <div class="professor-card text-center mx-2 mb-3">
                         <div class="card h-100 shadow-sm border-0">
-                            <img src="{{ asset('images/professors/' . $professor['image']) }}" class="card-img-top img-fluid rounded-circle" alt="{{ $professor['name'] }}" style="object-fit: cover; height: 200px;">
+                                                        <img src="{{ asset('images/professors/' . $professor['image']) }}" class="professor-img card-img-top img-fluid rounded-circle" alt="{{ $professor['name'] }}">
                             <div class="card-body d-flex flex-column justify-content-between text-center">
                                 <h5 class="card-title text-truncate" style="max-width: 30ch;">{{ $professor['name'] }}</h5>
                                 <p class="card-text">{{ $professor['department'] }}</p>

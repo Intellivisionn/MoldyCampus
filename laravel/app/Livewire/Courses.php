@@ -9,7 +9,7 @@ class Courses extends Component
 {
     public $category = 'trending';
     public $currentPage = 1;
-    public $itemsPerPage = 3;
+    public $itemsPerPage = 4;
 
     public function setCategory($category)
     {
@@ -48,7 +48,7 @@ class Courses extends Component
         // Replace this with actual logic to fetch courses by category
         $allCourses = [
             'trending' => collect([
-            ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'no-image.jpg'],
+            ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'economics.jpg'],
             ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'no-image.jpg'],
             ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'no-image.jpg'],
             ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'no-image.jpg'],

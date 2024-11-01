@@ -124,9 +124,9 @@
     text-align: center;
 }
 
-.course-card img {
-    width: 100%;
-    height: 160px;  /* Fixed height for images */
+.course-card-img {
+    width: 180px;
+    height: 200px;  /* Fixed height for images */
     border-radius: 10px;
     object-fit: cover;
 }
@@ -171,11 +171,11 @@
     align-items: center;
 }
 
-.professor img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+.professor-img {
+    width: 200px;
+    height: 200px;
     margin-bottom: 10px;
+    margin: 15px auto 5px;
     object-fit: cover;
 }
 
