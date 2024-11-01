@@ -15,7 +15,8 @@
     <!-- hero section -->
     @include('partials.hero')
 
-    <!-- Featured Courses loaded by LiveWire -->
+    <!-- Featured Courses loaded -->
+    @include('partials.courses')
 
     <!-- Professors Section -->
     @include('partials.professors')

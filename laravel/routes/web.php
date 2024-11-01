@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Courses;
+use App\Livewire\Professors;
 
 Route::get('/', function () {
     return view('homepage-unsigned');

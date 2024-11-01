@@ -25,7 +25,6 @@
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
     </div>
-    @livewire('courses')
 </section>
 
 <!-- Add Bootstrap JS -->
