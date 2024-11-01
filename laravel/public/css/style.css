@@ -94,6 +94,7 @@
 }
 
 /* Featured Courses */
+/* Featured Courses */
 .featured-courses h2 {
     font-size: 24px;
     margin: 30px 0;
@@ -101,23 +102,31 @@
     font-weight: bold;
 }
 
-.course-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.course-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .course-card {
     background-color: #fff;
+    width: 250px;   /* Fixed width */
+    height: 400px;  /* Fixed height */
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
     text-align: center;
 }
 
 .course-card img {
     width: 100%;
-    height: auto;
+    height: 160px;  /* Fixed height for images */
     border-radius: 10px;
     object-fit: cover;
 }
@@ -129,10 +138,9 @@
     color: #333;
 }
 
-.course-card p {
+.course-code {
     font-size: 14px;
     color: #777;
-    margin: 5px 0 15px;
 }
 
 .course-card button {
@@ -146,6 +154,7 @@
     font-family: 'Arial', sans-serif;
     font-weight: 500;
 }
+
 
 /* Professors Section */
 .professors {

@@ -3,14 +3,28 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Collection;
 
 class Courses extends Component
 {
     public $category = 'trending';
+    public $currentPage = 1;
+    public $itemsPerPage = 3;
 
     public function setCategory($category)
     {
         $this->category = $category;
+        $this->currentPage = 1;
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
+    }
+
+    public function previousPage()
+    {
+        $this->currentPage--;
     }
 
     public function render()
@@ -19,9 +33,6 @@ class Courses extends Component
         return view('livewire.courses', [
             'courses' => $courses,
             'category' => $this->category,
-
-            // replace with database logic later
-
             'categories' => [
                 'trending' => 'Trending',
                 'newly_added' => 'Newly Added',
@@ -34,30 +45,36 @@ class Courses extends Component
 
     private function getCoursesByCategory($category)
     {
-        // Replace this with actual logic to fetch courses by category later
+        // Replace this with actual logic to fetch courses by category
         $allCourses = [
-            'trending' => [
+            'trending' => collect([
                 ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'economics.jpg'],
                 ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'biology.jpg'],
-            ],
-            'newly_added' => [
-                ['title' => 'Computer Science', 'code' => 'CSCI 101', 'image' => 'cs.jpg'],
+                ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'psychology.jpg'],
+                ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'sociology.jpg'],
+                ['title' => 'History', 'code' => 'HIST 101', 'image' => 'history.jpg'],
                 ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'philosophy.jpg'],
-            ],
-            'top_rated' => [
                 ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'math.jpg'],
                 ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'physics.jpg'],
-            ],
-            'most_popular' => [
+            ]),
+            'newly_added' => collect([
+                ['title' => 'Computer Science', 'code' => 'CSCI 101', 'image' => 'cs.jpg'],
+                ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'philosophy.jpg'],
+            ]),
+            'top_rated' => collect([
+                ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'math.jpg'],
+                ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'physics.jpg'],
+            ]),
+            'most_popular' => collect([
                 ['title' => 'Chemistry', 'code' => 'CHEM 101', 'image' => 'chemistry.jpg'],
                 ['title' => 'History', 'code' => 'HIST 101', 'image' => 'history.jpg'],
-            ],
-            'recently_reviewed' => [
+            ]),
+            'recently_reviewed' => collect([
                 ['title' => 'Literature', 'code' => 'LIT 101', 'image' => 'literature.jpg'],
                 ['title' => 'Art', 'code' => 'ART 101', 'image' => 'art.jpg'],
-            ],
+            ]),
         ];
 
-        return $allCourses[$category] ?? [];
+        return $allCourses[$category] ?? collect([]);
     }
 }
