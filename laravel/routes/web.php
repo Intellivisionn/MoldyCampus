@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Courses;
+use App\Livewire\Professors;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage-unsigned');
 });
 
 Route::middleware([
@@ -15,3 +17,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/test', Courses::class);
