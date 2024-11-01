@@ -9,12 +9,12 @@
     </div>
 
     <!-- Courses Section -->
-    <div class="mt-4">
+    <div class="mt-4 position-relative">
         <h2 class="text-center mb-4">{{ $categories[$category] }}</h2>
         <div class="d-flex justify-content-center">
             <!-- Pagination Previous Button -->
             @if($currentPage > 1)
-                <button wire:click="previousPage" class="btn btn-secondary me-2">&lt;</button>
+                <button wire:click="previousPage" class="btn btn-link position-absolute start-0 top-50 translate-middle-y" style="font-size: 2rem; color: black;">&lt;</button>
             @endif
 
             <!-- Course Container -->
@@ -35,7 +35,7 @@
 
             <!-- Pagination Next Button -->
             @if($currentPage < ceil($courses->count() / $itemsPerPage))
-                <button wire:click="nextPage" class="btn btn-secondary ms-2">&gt;</button>
+                <button wire:click="nextPage" class="btn btn-link position-absolute end-0 top-50 translate-middle-y" style="font-size: 2rem; color: black;">&gt;</button>
             @endif
         </div>
     </div>
