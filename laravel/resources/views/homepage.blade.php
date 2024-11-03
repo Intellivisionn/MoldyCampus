@@ -21,9 +21,6 @@
         <!-- Professors Section -->
         @include('partials.professors')
 
-        <!-- Footer -->
-        @include('partials.footer')
-
         @livewireScripts
     </body>
 
