@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Courses;
-use App\Livewire\Professors;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('homepage-unsigned');
+    return view('homepage');
 });
 
 Route::middleware([
