@@ -1,20 +1,15 @@
 <?php
 
-use App\Livewire\Courses;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::view('/', 'homepage');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get('/test', Courses::class);
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
