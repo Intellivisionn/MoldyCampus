@@ -50,7 +50,16 @@ To get a local copy up and running, follow these steps:
     php artisan migrate
     ```
 
-6. **Serve the application:**
+    OR
+
+6. **Edit .env file**
+
+7. **Run asset migrations:**
+    ```sh
+    npm run build
+    ```
+
+8. **Serve the application:**
     ```sh
     php artisan serve
     ```
