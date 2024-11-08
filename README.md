@@ -25,6 +25,12 @@ MoldyCampus aims to provide students with a platform to rate and review universi
 
 To get a local copy up and running, follow these steps:
 
+0. **Edit ```shC:\PHP\php.ini``` file, and remove ; from these lines:**
+    ```sh
+    ;extension=zip
+    ;extension=pdo_pgsql
+    ```
+
 1. **Clone the repository:**
     ```sh
     git clone https://github.com/Intellivisionn/MoldyCampus
