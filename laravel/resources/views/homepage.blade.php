@@ -13,13 +13,13 @@
     <body>
 
         <!-- hero section -->
-        @include('partials.hero')
+        @include('partials.homepage.hero')
 
         <!-- Featured Courses loaded -->
-        @include('partials.courses')
+        @include('partials.homepage.courses')
 
         <!-- Professors Section -->
-        @include('partials.professors')
+        @include('partials.homepage.professors')
 
         @livewireScripts
     </body>
