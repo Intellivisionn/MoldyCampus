@@ -1,4 +1,4 @@
-<footer class="footer mt-5 pt-4 pb-2">
+<footer class="footer pt-4 pb-2">
     <!-- Centered Wrapper -->
     <div class="container text-center">
         <!-- Links -->
