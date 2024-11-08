@@ -18,7 +18,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-900 dark:bg-gray-100">
+    <div class="bg-gray-900 dark:bg-gray-100">
         <livewire:layout.navigation />
 
         <!-- Page Heading -->
@@ -35,7 +35,6 @@
             {{ $slot }}
         </main>
     </div>
-
     @include('partials.footer')
 </body>
 
