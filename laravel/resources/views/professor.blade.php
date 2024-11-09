@@ -29,19 +29,19 @@
     <div class="container-fluid py-4" style="height: 35vh; padding-left: 8rem; padding-right: 8rem">
         <div class="row h-100">
             
-            <div class="col-2 d-flex flex-column bg-success">
+            <div class="col-2 d-flex flex-column bg-success m-2">
                 Course 1
             </div>
 
-            <div class="col-2 d-flex flex-column bg-danger">
+            <div class="col-2 d-flex flex-column bg-danger m-2">
                 Course 2
             </div>
 
-            <div class="col-2 d-flex flex-column bg-success">
+            <div class="col-2 d-flex flex-column bg-success m-2">
                 Course 3
             </div>
 
-            <div class="col-2 d-flex flex-column bg-danger">
+            <div class="col-2 d-flex flex-column bg-danger m-2">
                 Course 4
             </div>
 
