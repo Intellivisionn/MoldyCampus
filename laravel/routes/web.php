@@ -14,4 +14,6 @@ Route::view('profile', 'profile')
 
 Route::view('course', 'course');
 
-require __DIR__.'/auth.php';
+Route::view('professor', 'professor');
+
+require __DIR__ . '/auth.php';
