@@ -6,7 +6,6 @@
         <button wire:click="setCategory('top_rated')" class="btn btn-outline-secondary me-2">Top Rated</button>
         <button wire:click="setCategory('most_popular')" class="btn btn-outline-secondary me-2">Most Popular</button>
         <button wire:click="setCategory('recently_reviewed')" class="btn btn-outline-secondary">Recently Reviewed</button>
-        <!-- Your buttons here -->
     </div>
 
     <!-- Courses Section -->
