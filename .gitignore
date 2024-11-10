@@ -46,3 +46,4 @@ yarn-error.log
 /.zed
 
 /laravel/config/database.php
+laravel/config/database.php
