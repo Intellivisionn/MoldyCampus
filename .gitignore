@@ -44,3 +44,5 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+
+/laravel/config/database.php
