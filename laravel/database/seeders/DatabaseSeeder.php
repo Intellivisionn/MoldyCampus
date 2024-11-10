@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CoursesTableSeeder::class,
             ProfessorsTableSeeder::class,
-            CourseRatingsTableSeeder::class,
+            //CourseRatingsTableSeeder::class,
         ]);
     }
 }

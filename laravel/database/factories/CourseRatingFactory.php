@@ -11,8 +11,8 @@ class CourseRatingFactory extends Factory
 
     public function definition()
     {
-        $course = \App\Models\Course::inRandomOrder()->first() ?? \App\Models\Course::factory()->create();
-        $user = \App\Models\User::inRandomOrder()->first() ?? \App\Models\User::factory()->create();
+        $course = \App\Models\Course::factory()->create();
+        $user = \App\Models\User::factory()->create();
 
         return [
             'id' => $this->faker->uuid,
