@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Course;
 
 class Discover extends Component
 {
@@ -16,6 +17,7 @@ class Discover extends Component
     public function render()
     {
         $courses = $this->getCoursesByCategory($this->category);
+
         return view('livewire.discover', [
             'courses' => $courses,
             'category' => $this->category,
@@ -31,21 +33,7 @@ class Discover extends Component
 
     private function getCoursesByCategory($category)
     {
-        // Your existing logic to fetch courses by category
-        $allCourses = [
-            'trending' => collect([
-                ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'economics.jpg'],
-                ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'no-image.jpg'],
-                ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'no-image.jpg'],
-                ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'no-image.jpg'],
-                ['title' => 'History', 'code' => 'HIST 101', 'image' => 'no-image.jpg'],
-                ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'no-image.jpg'],
-                ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'no-image.jpg'],
-                ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'no-image.jpg'],
-            ]),
-            // ... other categories
-        ];
-
-        return $allCourses[$category] ?? collect([]);
+        // For now, ignore categories and fetch all courses
+        return Course::all();
     }
 }
