@@ -15,6 +15,7 @@ class CourseFactory extends Factory
             'id' => $this->faker->uuid,
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph,
+            'image_path' => $this->faker->imageUrl(),
             'created_at' => now(),
             'updated_at' => now(),
         ];
