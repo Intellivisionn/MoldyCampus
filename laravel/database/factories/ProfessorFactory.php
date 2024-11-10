@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\CourseRating;
+use App\Models\Professor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class CourseRatingFactory extends Factory
+class ProfessorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CourseRating::class;
+    protected $model = Professor::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +24,10 @@ class CourseRatingFactory extends Factory
     {
         return [
             'id' => Str::uuid(),
-            'course_id' => Course::factory(),
-            'user_id' => User::factory(),
-            'rating' => $this->faker->randomFloat(1, 0, 5),
-            'review' => $this->faker->paragraph,
+            'name' => $this->faker->name,
+            'title' => $this->faker->jobTitle,
+            'image_path' => $this->faker->imageUrl(),
+            'description' => $this->faker->paragraph,
         ];
     }
 }
