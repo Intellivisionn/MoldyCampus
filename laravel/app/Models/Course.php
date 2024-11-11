@@ -14,5 +14,26 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'code', 'lecturer', 'image'];
+    protected $fillable = ['name', 'description', 'image_path'];
+
+    /**
+     * The professors that teach the course.
+     */
+    public function professors()
+    {
+        return $this->belongsToMany(Professor::class, 'course_professor');
+    }
+
+    public function studentAssistants()
+    {
+        return $this->belongsToMany(Professor::class, 'course_student_assistant', 'course_id', 'student_assistant_id');
+    }
+
+    /**
+     * The reviews for the course.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(CourseRating::class);
+    }
 }

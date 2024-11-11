@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Course;
+use App\Models\Professor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
@@ -18,5 +19,17 @@ class CourseFactory extends Factory
             'created_at' => now(),
             'updated_at' => now(),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Course $course) {
+
+            $professorIds = Professor::inRandomOrder()->take(3)->pluck('id')->toArray();
+            $course->professors()->attach($professorIds);
+
+            $assistantIds = Professor::inRandomOrder()->take(2)->pluck('id')->toArray();
+            $course->studentAssistants()->attach($assistantIds);
+        });
     }
 }
