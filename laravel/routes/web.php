@@ -6,6 +6,8 @@ Route::view('/', 'homepage');
 
 Route::view('discover', 'discover');
 
+Route::view('discoverprofessors', 'discoverProfessors');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
