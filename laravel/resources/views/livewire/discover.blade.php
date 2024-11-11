@@ -16,13 +16,15 @@
                 @foreach ($courses->take(12) as $course)
                     <div class="col-md-3">
                         <div class="card h-100 shadow-sm">
-                            <img src="{{ asset('images/courses/' . $course['image']) }}"
-                                 class="card-img-top img-fluid" alt="{{ $course['title'] }}"
-                                 style="object-fit: cover; height: 200px;">
+                        <img src="{{ file_exists(public_path('images/courses/' . $course->image_path)) 
+                        ? asset('images/courses/' . $course->image_path) 
+                        : asset('images/courses/no-image.jpg') }}"
+                                class="course-card-img card-img-top img-fluid" alt="{{ $course->title }}"
+                                style="object-fit: cover; height: 200px;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title text-truncate">{{ $course['title'] }}</h5>
                                 <p class="card-text">{{ $course['code'] }}</p>
-                                <a href="#" class="btn btn-outline-secondary rounded-pill mt-auto">View All Electives</a>
+                                <a href="#" class="btn btn-outline-secondary rounded-pill mt-auto">More Information</a>
                             </div>
                         </div>
                     </div>
