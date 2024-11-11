@@ -2,14 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Models\Course;
 use Livewire\Component;
-use Illuminate\Support\Collection;
 
 class Courses extends Component
 {
     public $category = 'trending';
+
     public $currentPage = 1;
-    public $itemsPerPage = 3; //need to figure out how to set this from screensize later
+
+    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
 
     public function setCategory($category)
     {
@@ -30,6 +32,7 @@ class Courses extends Component
     public function render()
     {
         $courses = $this->getCoursesByCategory($this->category);
+
         return view('livewire.courses', [
             'courses' => $courses,
             'category' => $this->category,
@@ -40,41 +43,43 @@ class Courses extends Component
                 'most_popular' => 'Most Popular',
                 'recently_reviewed' => 'Recently Reviewed',
             ],
+            'defaultImage' => asset('images/courses/no-image.jpg'),
         ]);
     }
 
     private function getCoursesByCategory($category)
     {
-        // Replace this with actual logic to fetch courses by category
-        $allCourses = [
-            'trending' => collect([
-            ['title' => 'Economics', 'code' => 'ECON 201', 'image' => 'economics.jpg'],
-            ['title' => 'Biology', 'code' => 'BIOL 304', 'image' => 'no-image.jpg'],
-            ['title' => 'Psychology', 'code' => 'PSYC 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Sociology', 'code' => 'SOC 202', 'image' => 'no-image.jpg'],
-            ['title' => 'History', 'code' => 'HIST 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'no-image.jpg'],
-            ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'no-image.jpg'],
-            ]),
-            'newly_added' => collect([
-            ['title' => 'Computer Science', 'code' => 'CSCI 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Philosophy', 'code' => 'PHIL 410', 'image' => 'no-image.jpg'],
-            ]),
-            'top_rated' => collect([
-            ['title' => 'Mathematics', 'code' => 'MATH 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Physics', 'code' => 'PHYS 201', 'image' => 'no-image.jpg'],
-            ]),
-            'most_popular' => collect([
-            ['title' => 'Chemistry', 'code' => 'CHEM 101', 'image' => 'no-image.jpg'],
-            ['title' => 'History', 'code' => 'HIST 101', 'image' => 'no-image.jpg'],
-            ]),
-            'recently_reviewed' => collect([
-            ['title' => 'Literature', 'code' => 'LIT 101', 'image' => 'no-image.jpg'],
-            ['title' => 'Art', 'code' => 'ART 101', 'image' => 'no-image.jpg'],
-            ]),
-        ];
+        switch ($category) {
+            case 'trending':
+                return Course::withCount(['reviews' => function ($query) {
+                    $query->where('created_at', '>=', now()->subMonth());
+                }])
+                    ->orderBy('reviews_count', 'desc')
+                    ->orderBy('name', 'asc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
 
-        return $allCourses[$category] ?? collect([]);
+            case 'newly_added':
+                return Course::orderBy('created_at', 'desc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            case 'top_rated':
+                return Course::withAvg('reviews', 'rating')
+                    ->orderBy('reviews_avg_rating', 'desc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            case 'most_popular':
+                return Course::withCount('reviews')
+                    ->orderBy('reviews_count', 'desc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            case 'recently_reviewed':
+                return Course::whereHas('reviews', function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                })
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            default:
+                return Course::paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+        }
     }
 }
