@@ -28,6 +28,8 @@ class Discover extends Component
                 'most_popular' => 'Most Popular',
                 'recently_reviewed' => 'Recently Reviewed',
             ],
+            'defaultImage' => asset('images/professors/no-image.jpg'),
+
         ]);
     }
 

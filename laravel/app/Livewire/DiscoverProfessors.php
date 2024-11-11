@@ -2,38 +2,69 @@
 
 namespace App\Livewire;
 
+use App\Models\Professor;
 use Livewire\Component;
-use App\Models\Course;
 
 class DiscoverProfessors extends Component
 {
-    public $category = 'trending';
+    public $category = 'most_popular';
+
+    public $currentPage = 1;
+
+    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
 
     public function setCategory($category)
     {
         $this->category = $category;
+        $this->currentPage = 1;
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
+    }
+
+    public function previousPage()
+    {
+        $this->currentPage--;
     }
 
     public function render()
     {
-        $courses = $this->getCoursesByCategory($this->category);
+        $professors = $this->getProfessorsByCategory($this->category);
 
         return view('livewire.discoverProfessors', [
-            'courses' => $courses,
+            'professors' => $professors,
             'category' => $this->category,
             'categories' => [
-                'trending' => 'Trending',
-                'newly_added' => 'Newly Added',
-                'top_rated' => 'Top Rated',
-                'most_popular' => 'Most Popular',
-                'recently_reviewed' => 'Recently Reviewed',
+                'most_popular' => 'Most Reviewed',
+                'most_liked' => 'Most Liked',
             ],
+            'defaultImage' => asset('images/professors/no-image.jpg'),
         ]);
     }
 
-    private function getCoursesByCategory($category)
+    private function getProfessorsByCategory($category)
     {
-        // For now, ignore categories and fetch all courses
-        return Course::all();
+        switch ($category) {
+            case 'most_popular':
+                return Professor::withCount(['courses as reviews_count' => function ($query) {
+                    $query->withCount('reviews');
+                }])
+                    ->orderBy('reviews_count', 'desc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            case 'most_liked':
+                return Professor::withCount(['courses as reviews_count' => function ($query) {
+                    $query->whereHas('reviews', function ($query) {
+                        $query->where('rating', '>', 3); // Assuming rating > 3 is considered a 'like'
+                    });
+                }])
+                    ->orderBy('reviews_count', 'desc')
+                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+
+            default:
+                return Professor::paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+        }
     }
 }
