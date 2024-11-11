@@ -34,7 +34,7 @@ To get a local copy up and running, follow these steps:
 1. **Clone the repository:**
     ```sh
     git clone https://github.com/Intellivisionn/MoldyCampus
-    cd moldycampus
+    cd moldycampus/laravel
     ```
 
 2. **Install dependencies:**
@@ -44,6 +44,7 @@ To get a local copy up and running, follow these steps:
 
 3. **Set up environment variables:**
     Copy the `.env.example` file to `.env` and update the necessary environment variables, especially the database configuration.
+    Edit /laravel/config/database.db to the confirguration
     For current database configuration, ask @svenons
 
 4. **Generate application key:**
@@ -51,21 +52,17 @@ To get a local copy up and running, follow these steps:
     php artisan key:generate
     ```
 
-5. **Run database migrations:**
+5. **Run database migrations:** IF NECESSARY
     ```sh
-    php artisan migrate
+    php artisan migrate:fresh
     ```
 
-    OR
-
-6. **Edit .env file**
-
-7. **Run asset migrations:**
+6. **Run asset migrations:**
     ```sh
     npm run build
     ```
 
-8. **Serve the application:**
+7. **Serve the application:**
     ```sh
     php artisan serve
     ```
