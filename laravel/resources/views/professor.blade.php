@@ -34,8 +34,33 @@
         </div>
 
         <!-- Second Main Row (50% of container height) -->
-        <div class="bg-danger d-flex align-items-center justify-content-center text-white" style="height: 34%;">
-            Lower Row (single element, full width)
+        <div class="d-flex align-items-center justify-content-center text-white" style="height: 34%;">
+            
+            <a href="/course" class="text-decoration-none col-2 d-flex flex-column m-2 h-100 text-black justify-content-end text-center" 
+            style="background-image: url('{{ asset('images/courses/no-image.jpg') }}'); background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.05); border: 2px solid #ccc; border-radius: 4px;">
+                <h2>Course 1</h2>
+                <p>1/5</p>
+            </a>
+
+
+            <a href="/course" class="text-decoration-none col-2 d-flex flex-column m-2 h-100 text-black justify-content-end text-center" 
+            style="background-image: url('{{ asset('images/courses/no-image.jpg') }}'); background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.05); border: 2px solid #ccc; border-radius: 4px;">
+                <h2>Course 1</h2>
+                <p>1/5</p>
+            </a>
+
+            <a href="/course" class="text-decoration-none col-2 d-flex flex-column m-2 h-100 text-black justify-content-end text-center" 
+            style="background-image: url('{{ asset('images/courses/no-image.jpg') }}'); background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.05); border: 2px solid #ccc; border-radius: 4px;">
+                <h2>Course 1</h2>
+                <p>1/5</p>
+            </a>
+            
+            <a href="/course" class="text-decoration-none col-2 d-flex flex-column m-2 h-100 text-black justify-content-end text-center" 
+            style="background-image: url('{{ asset('images/courses/no-image.jpg') }}'); background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.05); border: 2px solid #ccc; border-radius: 4px;">
+                <h2>Course 1</h2>
+                <p>1/5</p>
+            </a>
+
         </div>
 
     </div>
