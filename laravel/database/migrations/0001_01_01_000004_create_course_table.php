@@ -23,7 +23,7 @@ return new class extends Migration
         Schema::create('course_professor', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('professor_id')->constrained()->onDelete('cascade'); // Change to foreignId
+            $table->foreignId('professor_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
             $table->unique(['course_id', 'professor_id']);
@@ -33,7 +33,7 @@ return new class extends Migration
         Schema::create('course_student_assistant', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_assistant_id')->constrained('professors')->onDelete('cascade'); // Change to foreignId
+            $table->foreignId('student_assistant_id')->constrained('professors')->onDelete('cascade');
             $table->timestamps();
 
             $table->unique(['course_id', 'student_assistant_id']);
