@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->text('name');
             $table->text('description');
             $table->text('image_path')->nullable();
@@ -22,21 +22,21 @@ return new class extends Migration
         // Pivot table for course professors
         Schema::create('course_professor', function (Blueprint $table) {
             $table->id();
-            $table->uuid('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->uuid('professor_id');
-            $table->foreign('professor_id')->references('id')->on('professors')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('professor_id')->constrained()->onDelete('cascade'); // Change to foreignId
             $table->timestamps();
+
+            $table->unique(['course_id', 'professor_id']);
         });
 
         // Pivot table for course student assistants
         Schema::create('course_student_assistant', function (Blueprint $table) {
             $table->id();
-            $table->uuid('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->uuid('student_assistant_id');
-            $table->foreign('student_assistant_id')->references('id')->on('professors')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('student_assistant_id')->constrained('professors')->onDelete('cascade'); // Change to foreignId
             $table->timestamps();
+
+            $table->unique(['course_id', 'student_assistant_id']);
         });
     }
 

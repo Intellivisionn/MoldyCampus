@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('course_ratings', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('course_id');
+            $table->id()->primary();
+            $table->id('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->float('rating', 2, 1)->check('rating >= 0 and rating <= 5');

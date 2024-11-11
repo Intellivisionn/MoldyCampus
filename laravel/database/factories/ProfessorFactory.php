@@ -12,7 +12,6 @@ class ProfessorFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->uuid,
             'name' => $this->faker->name,
             'title' => $this->faker->jobTitle,
             'image_path' => $this->faker->imageUrl(),

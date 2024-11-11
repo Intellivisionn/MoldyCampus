@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('professors', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id()->primary()->unique();
             $table->text('name');
             $table->text('title');
             $table->text('image_path')->nullable();

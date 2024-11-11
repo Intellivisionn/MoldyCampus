@@ -12,7 +12,6 @@ class CourseFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->uuid,
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'image_path' => $this->faker->imageUrl(),
