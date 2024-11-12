@@ -25,14 +25,14 @@
                 @foreach ($courses->forPage($currentPage, $itemsPerPage) as $course)
                     <div class="mx-2 mb-3 text-center course-card">
                         <div class="border-0 shadow-sm card h-100">
-                            <img src="{{ asset('images/courses/' . $course['image']) }}"
-                                class="course-card-img card-img-top img-fluid" alt="{{ $course['title'] }}"
+                            <img src="{{ file_exists(public_path('images/courses/' . $course->image_path)) ? asset('images/courses/' . $course->image_path) : asset('images/courses/no-image.jpg') }}"
+                                class="course-card-img card-img-top img-fluid" alt="{{ $course->title }}"
                                 style="object-fit: cover; height: 200px;">
                             <div class="text-center card-body d-flex flex-column justify-content-between">
-                                <h5 class="card-title text-truncate" style="max-width: 30ch;">{{ $course['title'] }}
+                                <h5 class="card-title text-truncate" style="max-width: 30ch;">{{ $course->name }}
                                 </h5>
-                                <p class="card-text">{{ $course['code'] }}</p>
-                                <a href="#" class="btn btn-outline-secondary rounded-pill">View All Electives</a>
+                                <p class="card-text">{{ Str::limit($course->description, 50) }}</p>
+                                <a href="#" class="btn btn-outline-secondary rounded-pill">More Information</a>
                             </div>
                         </div>
                     </div>

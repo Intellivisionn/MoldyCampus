@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Professor;
 use Livewire\Component;
 
-class Professors extends Component
+class DiscoverProfessors extends Component
 {
     public $category = 'most_popular';
 
@@ -33,7 +33,7 @@ class Professors extends Component
     {
         $professors = $this->getProfessorsByCategory($this->category);
 
-        return view('livewire.professors', [
+        return view('livewire.discoverProfessors', [
             'professors' => $professors,
             'category' => $this->category,
             'categories' => [

@@ -10,7 +10,10 @@
                     <a class="nav-link" href="{{ '/' }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ '/' }}">Discover</a>
+                    <a class="nav-link" href="{{ '/discover' }}">Discover</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ '/discoverprofessors' }}">Professors</a>
                 </li>
             </ul>
             <form class="d-flex">
