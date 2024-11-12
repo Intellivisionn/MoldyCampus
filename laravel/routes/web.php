@@ -24,7 +24,7 @@ Route::view('course', 'course');
 Route::view('professor', 'professor');
 
 Route::get('/images/courses/{filename}', function ($filename) {
-    $path = storage_path('app/public/courses/'.$filename);
+    $path = storage_path('app/public/courses/' . $filename);
     $defaultPath = storage_path('app/public/courses/no-image.jpg');
 
     if (! File::exists($path)) {
@@ -44,4 +44,4 @@ Route::get('/images/courses', function () {
     abort(404, 'Filename not provided');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
