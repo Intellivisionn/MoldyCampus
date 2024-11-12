@@ -11,7 +11,7 @@ class Discover extends Component
 
     public $currentPage = 1;
 
-    public $itemsPerPage = 10; //need to figure out how to set this from screensize later
+    public $itemsPerPage = 12; 
 
     public function setCategory($category)
     {
@@ -20,20 +20,25 @@ class Discover extends Component
     }
 
     public function nextPage()
-    {
+{
+    if ($this->currentPage < $this->getCoursesByCategory($this->category)->lastPage()) {
         $this->currentPage++;
     }
+}
 
-    public function previousPage()
-    {
+public function previousPage()
+{
+    if ($this->currentPage > 1) {
         $this->currentPage--;
     }
+}
+
 
     public function render()
     {
         $courses = $this->getCoursesByCategory($this->category);
 
-        return view('livewire.courses', [
+        return view('livewire.discover', [
             'courses' => $courses,
             'category' => $this->category,
             'categories' => [
