@@ -7,64 +7,37 @@ use Livewire\Component;
 
 class DiscoverProfessors extends Component
 {
-    public $category = 'most_popular';
-
     public $currentPage = 1;
 
-    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
-
-    public function setCategory($category)
-    {
-        $this->category = $category;
-        $this->currentPage = 1;
-    }
+    public $itemsPerPage = 8;
 
     public function nextPage()
     {
-        $this->currentPage++;
+        if ($this->currentPage < $this->getProfessors()->lastPage()) {
+            $this->currentPage++;
+        }
     }
 
     public function previousPage()
     {
-        $this->currentPage--;
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
     }
 
     public function render()
     {
-        $professors = $this->getProfessorsByCategory($this->category);
+        $professors = $this->getProfessors();
 
         return view('livewire.discoverProfessors', [
             'professors' => $professors,
-            'category' => $this->category,
-            'categories' => [
-                'most_popular' => 'Most Reviewed',
-                'most_liked' => 'Most Liked',
-            ],
             'defaultImage' => asset('images/professors/no-image.jpg'),
         ]);
     }
 
-    private function getProfessorsByCategory($category)
+    private function getProfessors()
     {
-        switch ($category) {
-            case 'most_popular':
-                return Professor::withCount(['courses as reviews_count' => function ($query) {
-                    $query->withCount('reviews');
-                }])
-                    ->orderBy('reviews_count', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
-
-            case 'most_liked':
-                return Professor::withCount(['courses as reviews_count' => function ($query) {
-                    $query->whereHas('reviews', function ($query) {
-                        $query->where('rating', '>', 3); // Assuming rating > 3 is considered a 'like'
-                    });
-                }])
-                    ->orderBy('reviews_count', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
-
-            default:
-                return Professor::paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
-        }
+        return Professor::orderBy('name', 'asc')
+            ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
     }
 }
