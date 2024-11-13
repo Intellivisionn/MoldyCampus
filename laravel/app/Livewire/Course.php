@@ -35,8 +35,7 @@ class Course extends Component
 
         return view('livewire.course', [
             'course' => $course,
-            'defaultImage' => asset('images/courses/no-image.jpg'),
-            //'professors' => Professor::where
+            //'defaultImage' => asset('images/courses/no-image.jpg'),
             'reviews' => $reviews,
             'professors' => $professors,
         ]);
