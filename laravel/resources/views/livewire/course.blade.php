@@ -44,7 +44,7 @@
           <!-- Second Column (1/3 width) -->
           <div class="col-4 d-flex flex-column">
             <div class="d-flex justify-content-center flex-grow-1 flex-column" style="flex-basis: 16.67%; padding-left: 4vw;">
-                <span class='fw-bold'><h1>Data Management</h2></span>
+                <span class='fw-bold'><h1>{{ $course->name }}</h2></span>
                 <h5>SE304</h5>
             </div>
             <hr>
