@@ -36,4 +36,13 @@ class Professor extends Model
     {
         return $this->hasMany(CourseRating::class);
     }
+
+    public function courseRatings()
+    {
+        return CourseRating::whereHas('course', function ($query) {
+            $query->whereHas('professors', function ($query) {
+                $query->where('professor_id', $this->id);
+            });
+        })->get();
+    }
 }

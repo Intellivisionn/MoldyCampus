@@ -12,18 +12,18 @@ class Course extends Component
 {
     public $courseId;
 
-    /*public function mount($courseId)
+    /*public function mount($courseId) //should add this mount so we can get the id each time
     {
         $this->courseId = 1; //$courseId;
     }*/
 
     public function render()
     {
-        $courseId = 1; //set course ID to 1 for now
+        $courseId = 11; //set course ID staticly
 
-        $course = c::find($courseId); //$this->courseId
+        $course = c::find($courseId); //$this->courseId //change after, this finds the specific course by id
 
-        $reviews = $course ? $course->reviews()->get()->toArray() : [];
+        $reviews = $course ? $course->reviews()->get()->toArray() : []; //get reviews
 
         $reviews = $course ? $course->reviews()->with('user')->get()->map(function ($review) {
             return [
@@ -31,11 +31,9 @@ class Course extends Component
                 'review' => $review->review,
                 'student_name' => $review->user->name,
             ];
-        })->toArray() : [];
+        })->toArray() : []; //return reviews with names of the users
 
-        $professors = $course ? $course->professors()->get()->toArray() : [];
-
-        //$names = User::
+        $professors = $course ? $course->professors()->get()->toArray() : []; //list of professors
 
         return view('livewire.course', [
             'course' => $course,
