@@ -9,24 +9,11 @@ class Professors extends Component
 {
     public $category = 'most_popular';
 
-    public $currentPage = 1;
-
-    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
+    public $itemsPerPage = 4;
 
     public function setCategory($category)
     {
         $this->category = $category;
-        $this->currentPage = 1;
-    }
-
-    public function nextPage()
-    {
-        $this->currentPage++;
-    }
-
-    public function previousPage()
-    {
-        $this->currentPage--;
     }
 
     public function render()
@@ -52,7 +39,8 @@ class Professors extends Component
                     $query->withCount('reviews');
                 }])
                     ->orderBy('reviews_count', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             case 'most_liked':
                 return Professor::withCount(['courses as reviews_count' => function ($query) {
@@ -61,10 +49,11 @@ class Professors extends Component
                     });
                 }])
                     ->orderBy('reviews_count', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             default:
-                return Professor::paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                return Professor::take($this->itemsPerPage)->get();
         }
     }
 }
