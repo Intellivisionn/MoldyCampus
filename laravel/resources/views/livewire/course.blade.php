@@ -18,7 +18,7 @@
                 @foreach($reviews as $review)
                 <div class="card text-center mx-3" style="flex: 1 1 auto; max-height: 100%;">
                   <div class="card-body">
-                    <p class="card-text"> name-{{ $review['user_id'] }} rating: {{ $review['rating'] }}/5</p>
+                    <p class="card-text"> {{ $review['student_name'] }}&emsp; {{ $review['rating'] }}/5</p>
                     <p class="text-sm"> {{ $review['review'] }} </p>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                     foreach($reviews as $review)
                     {
                       $reviewsCount += 1;
-                      $allreviews += $review['rating'];
+                      $allReviews += $review['rating'];
                     }
                     if($reviewsCount != 0)
                     {

@@ -19,11 +19,19 @@ class Course extends Component
 
     public function render()
     {
-        $courseId = 11; //set course ID to 1 for now
+        $courseId = 1; //set course ID to 1 for now
 
         $course = c::find($courseId); //$this->courseId
 
         $reviews = $course ? $course->reviews()->get()->toArray() : [];
+
+        $reviews = $course ? $course->reviews()->with('user')->get()->map(function ($review) {
+            return [
+                'rating' => $review->rating,
+                'review' => $review->review,
+                'student_name' => $review->user->name,
+            ];
+        })->toArray() : [];
 
         $professors = $course ? $course->professors()->get()->toArray() : [];
 
