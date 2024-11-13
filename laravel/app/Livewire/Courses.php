@@ -9,24 +9,11 @@ class Courses extends Component
 {
     public $category = 'trending';
 
-    public $currentPage = 1;
-
-    public $itemsPerPage = 4; //need to figure out how to set this from screensize later
+    public $itemsPerPage = 4;
 
     public function setCategory($category)
     {
         $this->category = $category;
-        $this->currentPage = 1;
-    }
-
-    public function nextPage()
-    {
-        $this->currentPage++;
-    }
-
-    public function previousPage()
-    {
-        $this->currentPage--;
     }
 
     public function render()
@@ -56,30 +43,35 @@ class Courses extends Component
                 }])
                     ->orderBy('reviews_count', 'desc')
                     ->orderBy('name', 'asc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             case 'newly_added':
                 return Course::orderBy('created_at', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             case 'top_rated':
                 return Course::withAvg('reviews', 'rating')
                     ->orderBy('reviews_avg_rating', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             case 'most_popular':
                 return Course::withCount('reviews')
                     ->orderBy('reviews_count', 'desc')
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             case 'recently_reviewed':
                 return Course::whereHas('reviews', function ($query) {
                     $query->orderBy('created_at', 'desc');
                 })
-                    ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                    ->take($this->itemsPerPage)
+                    ->get();
 
             default:
-                return Course::paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+                return Course::take($this->itemsPerPage)->get();
         }
     }
 }

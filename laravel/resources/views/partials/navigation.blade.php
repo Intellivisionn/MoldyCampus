@@ -2,7 +2,7 @@
     <div class="container">
         <a href="{{ '/' }}" class="navbar-brand">MoldyCampus</a>
         <div class="navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="mb-2 navbar-nav me-auto mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ '/' }}">Home</a>
                 </li>
@@ -10,7 +10,7 @@
                     <a class="nav-link" href="{{ '/' }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ '/discover' }}">Discover</a>
+                    <a class="nav-link" href="{{ '/discover' }}">Courses</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ '/discoverprofessors' }}">Professors</a>
