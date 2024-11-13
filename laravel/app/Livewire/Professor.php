@@ -8,11 +8,15 @@ use App\Models\Professor as p;
 
 class Professor extends Component
 {
+    public $professorId;
+
+    public function mount($professorId) //should add this mount so we can get the id each time
+    {
+        $this->professorId = $professorId; //$courseId;
+    }
     public function render()
     {
-        $professorId = 1; //change logic of this after
-
-        $professor = p::find($professorId); // find specific professor by id
+        $professor = p::find($this->professorId); // find specific professor by id
 
         $courses = $professor ? $professor->courses()->get()->toArray() : [];
 

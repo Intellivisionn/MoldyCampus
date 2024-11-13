@@ -1,4 +1,3 @@
-<!-- this is not used, resources/views/course/show.blade.php is used now
 <x-app-layout>
     <div style="height: 100vh;">
         

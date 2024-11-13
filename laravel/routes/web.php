@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage');
@@ -19,9 +20,13 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::view('course', 'course');
+Route::get('course/{courseId}', function ($courseId) {
+    return view('course.show', compact('courseId'));
+})->name('course.show');
 
-Route::view('professor', 'professor');
+Route::get('professor/{professorId}', function ($professorId) {
+    return view('professor.show', compact('professorId'));
+})->name('professor.show');
 
 Route::get('/images/courses/{filename}', function ($filename) {
     $path = storage_path('app/public/courses/' . $filename);

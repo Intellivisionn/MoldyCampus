@@ -12,16 +12,14 @@ class Course extends Component
 {
     public $courseId;
 
-    /*public function mount($courseId) //should add this mount so we can get the id each time
+    public function mount($courseId) //should add this mount so we can get the id each time
     {
-        $this->courseId = 1; //$courseId;
-    }*/
+        $this->courseId = $courseId; //$courseId;
+    }
 
     public function render()
     {
-        $courseId = 11; //set course ID staticly
-
-        $course = c::find($courseId); //$this->courseId //change after, this finds the specific course by id
+        $course = c::find($this->courseId); //$this->courseId //change after, this finds the specific course by id
 
         $reviews = $course ? $course->reviews()->get()->toArray() : []; //get reviews
 
