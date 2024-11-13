@@ -8,35 +8,22 @@
             </div>
             <div class="d-flex justify-content-center flex-grow-1 mx-5 pt-3 " style="flex-basis: 33.33%;">
                 <p>
-                    &emsp;Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor litora pretium proin blandit turpis magna felis finibus imperdiet. 
-                    Pulvinar risus elementum molestie quam aenean. Tristique dignissim leo molestie blandit urna nulla sociosqu mattis. Ipsum pulvinar 
-                    nisi bibendum commodo leo consequat. Dictumst nisl at laoreet mi fringilla nibh orci ullamcorper.
+                    &emsp;{{ $course->description }}
                 </p>
             </div>
             <div class="d-flex justify-content-center flex-grow-1" style="flex-basis: 33.33%; max-height: 33.33%">
               <div class="d-flex justify-content-around w-100" style="height: 100%;">
                 <!-- Individual Card -->
+
+                @foreach($reviews as $review)
                 <div class="card text-center mx-3" style="flex: 1 1 auto; max-height: 100%;">
                   <div class="card-body">
-                    <p class="card-text">Laura</p>
-                    <p class="text-sm">Lorem ipsum odor amet, consectetuer adipiscing elit. Natoque convallis convallis integer elementum mattis. 
-                      Hac justo metus natoque consectetur rutrum feugiat ac turpis.</p>
+                    <p class="card-text"> name-{{ $review['user_id'] }} rating: {{ $review['rating'] }}/5</p>
+                    <p class="text-sm"> {{ $review['review'] }} </p>
                   </div>
                 </div>
-                <div class="card text-center mx-3" style="flex: 1 1 auto; max-height: 100%;">
-                  <div class="card-body">
-                    <p class="card-text">James</p>
-                    <p class="text-sm">Lorem ipsum odor amet, consectetuer adipiscing elit. Natoque convallis convallis integer elementum mattis. 
-                      Hac justo metus natoque consectetur rutrum feugiat ac turpis.</p>
-                  </div>
-                </div>
-                <div class="card text-center mx-3" style="flex: 1 1 auto; max-height: 100%;">
-                  <div class="card-body">
-                    <p class="card-text">Philip</p>
-                    <p class="text-sm">Lorem ipsum odor amet, consectetuer adipiscing elit. Natoque convallis convallis integer elementum mattis. 
-                      Hrac jujo robi kokain na predmon travniku ac turpis.</p>
-                  </div>
-                </div>
+                @endforeach
+
               </div>
             </div>
           </div>
@@ -45,7 +32,7 @@
           <div class="col-4 d-flex flex-column">
             <div class="d-flex justify-content-center flex-grow-1 flex-column" style="flex-basis: 16.67%; padding-left: 4vw;">
                 <span class='fw-bold'><h1>{{ $course->name }}</h2></span>
-                <h5>SE304</h5>
+                <h5>(add code for each course) ID:{{ $course->id }}</h5>
             </div>
             <hr>
             <div class="d-flex align-items-center justify-content-center flex-grow-1 flex-column" style="flex-basis: 33.33%;">
@@ -55,26 +42,19 @@
                 <!-- Row of Cards -->
                 <div class="d-flex flex-grow-1 justify-content-around">
                   <!-- Individual Card -->
-                  <a href='/professor' class="card d-flex flex-column align-items-center text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px;">
-                    <img src="images/professors/no-image.jpg" alt="Card Image" 
-                          class="img-fluid" 
-                          style="flex-grow: 1; object-fit: contain; max-height: 150px;">
-                    <div class="card-body">
-                      <p class="card-text">Sadok Ben Yahia</p>
-                    </div>
-                  </a>
-                  
-                  <!-- Duplicate as needed -->
-                  <a href='/professor' class="card d-flex flex-column align-items-center text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px;">
-                    <img src="images/professors/no-image.jpg" alt="Card Image" 
-                          class="img-fluid" 
-                          style="flex-grow: 1; object-fit: contain; max-height: 150px;">
-                    <div class="card-body">
-                      <p class="card-text">Sadok Ben Yahia</p>
-                    </div>
-                  </a>
 
-                  <!-- Duplicate as needed -->
+                  @foreach($professors as $professor)
+                  <a href='/professor' class="card d-flex flex-column align-items-center text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px;">
+                    <img src="images/professors/no-image.jpg" alt="Card Image" 
+                          class="img-fluid" 
+                          style="flex-grow: 1; object-fit: contain; max-height: 150px;">
+                    <div class="card-body">
+                      <p class="card-text"> {{$professor['name']}} </p>
+                    </div>
+                  </a>
+                  @endforeach
+
+                  <!-- Duplicate as needed 
                   <a href='/professor' class="card d-flex flex-column align-items-center text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px;">
                     <img src="images/professors/no-image.jpg" alt="Card Image" 
                           class="img-fluid" 
@@ -82,13 +62,32 @@
                     <div class="card-body">
                       <p class="card-text mb-0">Sadok Ben Yahia</p>
                     </div>
-                  </a>
+                  </a>-->
+
                 </div>
             </div>
             <hr>
             <div class="d-flex justify-content-center flex-grow-1 flex-column" style="flex-basis: 35%;">
               <div class="d-flex flex-grow-1 justify-content-between">
-                <h4 class="mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>4.3/5</h4>
+                <h4 class="mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                  <?php 
+                    $reviewsCount = 0;
+                    $allReviews = 0;
+                    foreach($reviews as $review)
+                    {
+                      $reviewsCount += 1;
+                      $allreviews += $review['rating'];
+                    }
+                    if($reviewsCount != 0)
+                    {
+                      $finalRating = $allReviews/$reviewsCount;
+                      echo "$finalRating";
+                    }
+                    else{
+                      echo 'no ratings';
+                    }
+                    ?>
+                </h4>
                 <h4>#143</h4>
               </div>
               <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
@@ -100,7 +99,7 @@
             </div>
             <hr>
             <div class="d-flex justify-content-center flex-grow-1" style="flex-basis: 15%;">
-                <button wire:click="nextCourse()" type="button" class="btn btn-outline-secondary w-100">Go to university page</button>
+                <button type="button" class="btn btn-outline-secondary w-100">Go to university page</button>
             </div>
           </div>
       

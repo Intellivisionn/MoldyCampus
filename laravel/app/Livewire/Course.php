@@ -4,6 +4,9 @@ namespace App\Livewire;
 
 use App\Models\Course as c;
 use Livewire\Component;
+use App\Models\Professor;
+use App\Models\User;
+use App\Models\CourseRating;
 
 class Course extends Component
 {
@@ -14,19 +17,24 @@ class Course extends Component
         $this->courseId = 1; //$courseId;
     }*/
 
-    public function nextCourse()
-    {
-        $this->courseId += 1;
-    }
-
     public function render()
     {
-        $course = c::find(1); //$this->courseId
+        $courseId = 11; //set course ID to 1 for now
+
+        $course = c::find($courseId); //$this->courseId
+
+        $reviews = $course ? $course->reviews()->get()->toArray() : [];
+
+        $professors = $course ? $course->professors()->get()->toArray() : [];
+
+        //$names = User::
 
         return view('livewire.course', [
             'course' => $course,
             'defaultImage' => asset('images/courses/no-image.jpg'),
-            //'name' => $course->name, huhhhh?
+            //'professors' => Professor::where
+            'reviews' => $reviews,
+            'professors' => $professors,
         ]);
     }
 }
