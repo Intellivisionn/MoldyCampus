@@ -4,7 +4,7 @@
           <!-- First Column (2/3 width) -->
           <div class="col-8 d-flex flex-column mx-0 px-0">
             <div class="position-relative" style="height: 33.33%; overflow: hidden;">
-              <img src="{{ file_exists(asset('images/courses/' . $course->image_path))
+              <img src="{{ file_exists(public_path('images/courses/' . $course->image_path))
               ? asset('images/courses/' . $course->image_path)
               : asset('images/courses/no-image.jpg') }}" 
               alt="Image" class="position-absolute w-100 h-100" style="object-fit: cover; top: 0; left: 0;">
@@ -51,7 +51,7 @@
                   @if(count($professors) > 0)
                   @foreach($professors as $professor)
                     <a href='/professor/{{$professor['id']}}' class="card d-flex flex-column align-items-start text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px; max-width: 120px; max-height: 220px;">
-                      <img src="{{public_path('images/professors/' . $professor['image_path'])}}) 
+                      <img src="{{ file_exists(public_path('images/professors/' . $professor['image_path'])) 
                                   ? asset('images/professors/' . $professor['image_path']) 
                                   : asset('images/professors/no-image.jpg') }}" 
                           alt="Card Image" 
