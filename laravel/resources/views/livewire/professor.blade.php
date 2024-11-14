@@ -39,9 +39,9 @@
             <!-- Individual Card -->
             @foreach($courses as $course)
             <a href='/course/{{$course['id']}}' class="card text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px; width: 10vw; max-height: 100%;">
-                <img src="{{ file_exists(asset('images/courses/' . $course['image_path']))
-                ? asset('images/courses/' . $course['image_path'])
-                : asset('images/courses/no-image.jpg') }}" 
+                <img src="{{ file_exists(public_path('images/professors/' . $course['image_path'])) 
+                ? asset('images/professors/' . $course['image_path']) 
+                : asset('images/professors/no-image.jpg') }}" 
                 alt="Card Image" class="img-fluid" style="object-fit: contain; max-height: 100px;">
                 <div class="card-body">
                   <p class="card-text">{{ $course['name'] }}</p>

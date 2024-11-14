@@ -33,11 +33,23 @@ class Course extends Component
 
         $professors = $course ? $course->professors()->get()->toArray() : []; //list of professors
 
+        $reviewsCount = 0;
+        $allReviews = 0;
+        foreach($reviews as $review)
+        {
+            $reviewsCount += 1;
+            $allReviews += $review['rating'];
+        }
+        $finalRating = $reviewsCount > 0 ? round($allReviews / $reviewsCount, 2) : 0;
+
         return view('livewire.course', [
             'course' => $course,
             //'defaultImage' => asset('images/courses/no-image.jpg'),
             'reviews' => $reviews,
             'professors' => $professors,
+            'finalRating' => $finalRating,
         ]);
     }
+
 }
+

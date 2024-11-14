@@ -12,9 +12,9 @@ Route::view('discover', 'discover');
 
 Route::view('discoverprofessors', 'discoverProfessors');
 
-Route::view('dashboard', 'dashboard')
+Route::view('dashboard', 'homepage')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('homepage');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

@@ -38,7 +38,7 @@
           <div class="col-4 d-flex flex-column">
             <div class="d-flex justify-content-center flex-grow-1 flex-column" style="flex-basis: 16.67%; padding-left: 4vw;">
                 <span class='fw-bold'><h1>{{ $course->name }}</h2></span>
-                <h5>(add code for each course) ID:{{ $course->id }}</h5>
+                <h5>Course ID: {{ $course->code }}</h5>
             </div>
             <hr>
             <div class="d-flex align-items-center justify-content-center flex-grow-1 flex-column" style="flex-basis: 33.33%;">
@@ -51,8 +51,8 @@
                   @if(count($professors) > 0)
                   @foreach($professors as $professor)
                     <a href='/professor/{{$professor['id']}}' class="card d-flex flex-column align-items-start text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px; max-width: 120px; max-height: 220px;">
-                      <img src="{{ file_exists(public_path('images/courses/' . $course->image_path)) 
-                                  ? asset('images/courses/' . $course->image_path) 
+                      <img src="{{public_path('images/professors/' . $professor['image_path'])}}) 
+                                  ? asset('images/professors/' . $professor['image_path']) 
                                   : asset('images/professors/no-image.jpg') }}" 
                           alt="Card Image" 
                           class="img-fluid" 
@@ -63,18 +63,8 @@
                     </a>
                   @endforeach
                   @else
-                    <h2>NO PROFESSORS???</h2>
+                    <h2>No Professors Specified</h2>
                   @endif
-
-                  <!-- Duplicate as needed 
-                  <a href='/professor' class="card d-flex flex-column align-items-center text-center text-decoration-none" style="flex: 1 1 auto; margin: 0 10px;">
-                    <img src="images/professors/no-image.jpg" alt="Card Image" 
-                          class="img-fluid" 
-                          style="flex-grow: 1; object-fit: contain; max-height: 150px;">
-                    <div class="card-body">
-                      <p class="card-text mb-0">Sadok Ben Yahia</p>
-                    </div>
-                  </a>-->
 
                 </div>
             </div>
@@ -83,17 +73,7 @@
               <div class="d-flex flex-grow-1 justify-content-between">
                 @if(count($reviews) > 0)
                 <h4 class="mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-                  <?php 
-                    $reviewsCount = 0;
-                    $allReviews = 0;
-                    foreach($reviews as $review)
-                    {
-                      $reviewsCount += 1;
-                      $allReviews += $review['rating'];
-                    }
-                    $finalRating = $allReviews/$reviewsCount;
-                    echo "$finalRating";
-                    ?>
+                  {{$finalRating}} / 5
                 </h4>
                 <h4>#143</h4>
                 

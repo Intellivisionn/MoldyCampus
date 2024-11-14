@@ -18,7 +18,7 @@ class CourseRatingFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'rating' => $this->faker->randomFloat(1, 0, 5),
-            'review' => $this->faker->paragraph,
+            'review' => $this->faker->text(100),
             'created_at' => now(),
             'updated_at' => now(),
         ];
