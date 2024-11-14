@@ -37,5 +37,13 @@ Route::get('/images/courses/{filename}', function ($filename) {
 Route::get('/images/courses', function () {
     abort(404, 'Filename not provided');
 });
+Route::view('privacy-policy', 'partials.privacy-policy')
+    ->name('privacy-policy');
+
+Route::view('tos', 'partials.tos')
+    ->name('tos');
+
+Route::view('contact_us', 'partials.contact_us')
+    ->name('contact_us');
 
 require __DIR__.'/auth.php';
