@@ -19,13 +19,15 @@
                         <!-- Individual Card -->
                         @if (count($reviews) > 0)
                             @foreach ($reviews as $review)
-                                <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%;">
-                                    <div class="card-body">
-                                        <p class="card-text"> {{ $review['student_name'] }}&emsp;
-                                            {{ $review['rating'] }}/5</p>
-                                        <p class="text-sm"> {{ $review['review'] }} </p>
+                                @if (!empty($review['review']))
+                                    <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%; max-width: 20vw;">
+                                        <div class="card-body">
+                                            <p class="card-text"> {{ $review['student_name'] }}&emsp;
+                                                {{ $review['rating'] }}/5</p>
+                                            <p class="text-sm"> {{ $review['review'] }} </p>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         @else
                             <h2>No Ratings</h2>
@@ -55,7 +57,7 @@
                         <!-- Individual Card -->
                         @if (count($professors) > 0)
                             @foreach ($professors as $professor)
-                                <a href='/professor/{{ $professor['id'] }}'
+                                <a href='/professor/{{ $professor["id"] }}'
                                     class="text-center card d-flex flex-column align-items-start text-decoration-none"
                                     style="flex: 1 1 auto; margin: 0 10px; max-width: 120px; max-height: 220px;">
                                     <img src="{{ file_exists(public_path('images/professors/' . $professor['image_path']))
@@ -133,86 +135,90 @@
                 @if (auth()->check())
                     <div style="height: 10px"></div>
                     <div class="d-flex justify-content-center flex-grow-1" style="flex-basis: 15%;">
-                        <button type="button" class="btn btn-outline-secondary w-100" data-toggle="modal"
-                            data-target="#addReview">
-                            Add Review
+                        <button type="button" class="btn btn-outline-secondary w-100" wire:click="openModal">
+                            Add Rating
                         </button>
                     </div>
                 @endif
             </div>
         </div>
     </div><!-- resources/views/livewire/star-rating.blade.php -->
-    <div class="modal fade" id="addReview" tabindex="-1" aria-labelledby="addReviewLabel" aria-hidden="true"
-        wire:ignore.self>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addReviewLabel">Welcome to Laravel Popup</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Overall Score -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Overall Score</h4>
-                        <h4 class="mb-0 ms-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <button type="button" wire:click="setRating('overall', {{ $i }})"
-                                    class="star-btn">
-                                    <i
-                                        class="{{ $i <= $categoryScores['overall'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
-                                </button>
-                            @endfor
-                        </h4>
-                    </div>
 
-                    <hr>
-                    <p style="color: #AAA">(Optional)</p>
-
-                    <!-- Course Material Rating -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h6>Course material</h6>
-                        <h6 class="mb-0 ms-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <button type="button" wire:click="setRating('course_material', {{ $i }})"
-                                    class="star-btn">
-                                    <i
-                                        class="{{ $i <= $categoryScores['course_material'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
-                                </button>
-                            @endfor
-                        </h6>
+    <!-- Modal Structure -->
+    @if ($isModalOpen)
+        <div class="modal show d-block" tabindex="-1" role="dialog" id="addReview" wire:key="review-modal" wire:ignore.self>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Rate {{ $course->name }}</h5>
+                        <button type="button" class="btn-close" wire:click="closeModal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                        <!-- Overall Score -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Overall Score</h4>
+                            <h4 class="mb-0 ms-3">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="setRating('overall', {{ $i }})" class="star-btn">
+                                        <i class="{{ $i <= $categoryScores['overall'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
+                                    </button>
+                                @endfor
+                            </h4>
+                        </div>
 
-                    <!-- Interactivity Rating -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h6>Interactivity</h6>
-                        <h6 class="mb-0 ms-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <button type="button" wire:click="setRating('interactivity', {{ $i }})"
-                                    class="star-btn">
-                                    <i
-                                        class="{{ $i <= $categoryScores['interactivity'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
-                                </button>
-                            @endfor
-                        </h6>
-                    </div>
+                        <hr>
+                        <p style="color: #AAA">(Optional)</p>
 
-                    <!-- Use of Technology Rating -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h6>Use of technology</h6>
-                        <h6 class="mb-0 ms-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <button type="button" wire:click="setRating('technology', {{ $i }})"
-                                    class="star-btn">
-                                    <i
-                                        class="{{ $i <= $categoryScores['technology'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
-                                </button>
-                            @endfor
-                        </h6>
+                        <!-- Course Material Rating -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Course material</h6>
+                            <h6 class="mb-0 ms-3">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="setRating('course_material', {{ $i }})" class="star-btn">
+                                        <i class="{{ $i <= $categoryScores['course_material'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
+                                    </button>
+                                @endfor
+                            </h6>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Interactivity</h6>
+                            <h6 class="mb-0 ms-3">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="setRating('interactivity', {{ $i }})" class="star-btn">
+                                        <i class="{{ $i <= $categoryScores['interactivity'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
+                                    </button>
+                                @endfor
+                            </h6>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Use of technology</h6>
+                            <h6 class="mb-0 ms-3">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="setRating('technology', {{ $i }})" class="star-btn">
+                                        <i class="{{ $i <= $categoryScores['technology'] ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
+                                    </button>
+                                @endfor
+                            </h6>
+                        </div>
+                        <div class="mt-4">
+                            <label for="reviewText" class="form-label">Your Review</label>
+                            <textarea id="reviewText" class="form-control" wire:model="reviewText" rows="4" placeholder="Write your review here..."></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit</button>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button type="button" wire:click="removeRating" class="btn btn-danger">Remove</button>
+                        <button type="button" wire:click="submitRating" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
+    <style>
+        /* Ensure the background overlay effect */
+        .modal.show.d-block {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</div>

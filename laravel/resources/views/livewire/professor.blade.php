@@ -44,8 +44,8 @@
         <div class="d-flex justify-content-around w-50" style="height: 100%;">
             <!-- Individual Card -->
             @foreach ($courses as $course)
-                <a href='/course/{{ $course['id'] }}' class="text-center card text-decoration-none"
-                    style="flex: 1 1 auto; margin: 0 10px; width: 10vw; max-height: 100%;">
+                <a href='/course/{{ $course["id"] }}' class="text-center card text-decoration-none"
+                    style="flex: 1 1 auto; margin: 0 10px; max-width: 20vw; max-height: 100%;">
                     <img src="{{ file_exists(public_path('images/courses/' . $course['image_path'])) ? asset('images/courses/' . $course['image_path']) : asset('images/courses/no-image.jpg') }}"
                         alt="{{ $course['name'] }}" class="img-fluid" style="object-fit: contain; max-height: 100px;">
                     <div class="card-body">
@@ -56,22 +56,6 @@
                     </div>
                 </a>
             @endforeach
-            <!-- Duplicate as needed
-            <a href='/course' class="text-center card text-decoration-none" style="flex: 1 1 auto; margin: 0 10px; width: 10vw; max-height: 100%;">
-                <img src="images/courses/economics.jpg" alt="Card Image" class="img-fluid" style="object-fit: contain; max-height: 100px;">
-                <div class="card-body">
-                  <p class="card-text">Economics</p>
-                  <p><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></p>
-                </div>
-            </a>
-            //Duplicate as needed//
-            <a href='/course' class="text-center card text-decoration-none" style="flex: 1 1 auto; margin: 0 10px; width: 10vw; max-height: 100%;">
-                <img src="images/homepage/campus.jpg" alt="Card Image" class="img-fluid" style="object-fit: contain; max-height: 100px;">
-                <div class="card-body">
-                  <p class="card-text">Data Management</p>
-                  <p><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></p>
-                </div>
-            </a>-->
         </div>
     </div>
 </div>
