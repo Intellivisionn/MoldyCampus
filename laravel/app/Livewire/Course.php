@@ -4,13 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Course as c;
 use Livewire\Component;
-use App\Models\Professor;
-use App\Models\User;
-use App\Models\CourseRating;
 
 class Course extends Component
 {
     public $courseId;
+
+    public $categoryScores = [];
 
     public function mount($courseId) //should add this mount so we can get the id each time
     {
@@ -35,12 +34,19 @@ class Course extends Component
 
         $reviewsCount = 0;
         $allReviews = 0;
-        foreach($reviews as $review)
-        {
+        foreach ($reviews as $review) {
             $reviewsCount += 1;
             $allReviews += $review['rating'];
         }
+
         $finalRating = $reviewsCount > 0 ? round($allReviews / $reviewsCount, 2) : 0;
+
+        $this->categoryScores = [
+            'overall' => 0,
+            'course_material' => 0,
+            'interactivity' => 0,
+            'technology' => 0,
+        ];
 
         return view('livewire.course', [
             'course' => $course,
@@ -48,8 +54,12 @@ class Course extends Component
             'reviews' => $reviews,
             'professors' => $professors,
             'finalRating' => $finalRating,
+            'categoryScores' => $this->categoryScores,
         ]);
     }
 
+    public function setRating($category, $score)
+    {
+        $this->categoryScores[$category] = $score;
+    }
 }
-

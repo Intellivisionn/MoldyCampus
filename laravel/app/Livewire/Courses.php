@@ -52,11 +52,15 @@ class Courses extends Component
                     ->get();
 
             case 'top_rated':
-                return Course::withAvg('reviews', 'rating')
+                return Course::with('reviews')
+                    ->select('courses.*')
+                    ->selectRaw('AVG(course_ratings.rating) as reviews_avg_rating')
+                    ->join('course_ratings', 'courses.id', '=', 'course_ratings.course_id')
+                    ->groupBy('courses.id')
+                    ->havingRaw('AVG(course_ratings.rating) > 0')
                     ->orderBy('reviews_avg_rating', 'desc')
                     ->take($this->itemsPerPage)
                     ->get();
-
             case 'most_popular':
                 return Course::withCount('reviews')
                     ->orderBy('reviews_count', 'desc')

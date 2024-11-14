@@ -18,13 +18,13 @@
                 @foreach ($courses as $course)
                     <div class="mx-2 mb-3 text-center course-card" style="width: 250px; height: 350px;">
                         <a href="{{ url('course/' . $course->id) }}" class="text-decoration-none">
-                            <div class="border-0 shadow-sm card h-100">
+                            <div class="border-0 card h-100">
                                 <img src="{{ file_exists(public_path('images/courses/' . $course->image_path)) ? asset('images/courses/' . $course->image_path) : asset('images/courses/no-image.jpg') }}"
                                     class="mx-auto course-card-img card-img-top img-fluid" alt="{{ $course->title }}"
                                     style="object-fit: cover; height: 200px;">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="text-center card-title text-truncate" style="max-width: 30ch;">
-                                        {{ $course->name }}
+                                        {{ Str::limit($course->name, 18) }}
                                     </h5>
                                     <p class="card-text text-start">{{ Str::limit($course->description, 50) }}</p>
                                 </div>
