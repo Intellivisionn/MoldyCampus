@@ -2,38 +2,42 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Course;
+use Livewire\Component;
 
 class Discover extends Component
 {
-    public $category = 'trending';
+    public $currentPage = 1;
 
-    public function setCategory($category)
+    public $itemsPerPage = 12;
+
+    public function nextPage()
     {
-        $this->category = $category;
+        if ($this->currentPage < $this->getCourses()->lastPage()) {
+            $this->currentPage++;
+        }
+    }
+
+    public function previousPage()
+    {
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
     }
 
     public function render()
     {
-        $courses = $this->getCoursesByCategory($this->category);
+        $courses = $this->getCourses();
 
         return view('livewire.discover', [
             'courses' => $courses,
-            'category' => $this->category,
-            'categories' => [
-                'trending' => 'Trending',
-                'newly_added' => 'Newly Added',
-                'top_rated' => 'Top Rated',
-                'most_popular' => 'Most Popular',
-                'recently_reviewed' => 'Recently Reviewed',
-            ],
+            'defaultImage' => asset('images/courses/no-image.jpg'),
         ]);
     }
 
-    private function getCoursesByCategory($category)
+    private function getCourses()
     {
-        // For now, ignore categories and fetch all courses
-        return Course::all();
+        return Course::orderBy('name', 'asc')
+            ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
     }
 }

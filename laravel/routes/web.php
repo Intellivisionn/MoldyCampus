@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage');
 });
 
 Route::view('discover', 'discover');
+
+Route::view('discoverprofessors', 'discoverProfessors');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -17,8 +20,16 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::get('course/{courseId}', function ($courseId) {
+    return view('course.show', compact('courseId'));
+})->name('course.show');
+
+Route::get('professor/{professorId}', function ($professorId) {
+    return view('professor.show', compact('professorId'));
+})->name('professor.show');
+
 Route::get('/images/courses/{filename}', function ($filename) {
-    $path = storage_path('app/public/courses/'.$filename);
+    $path = storage_path('app/public/courses/' . $filename);
     $defaultPath = storage_path('app/public/courses/no-image.jpg');
 
     if (! File::exists($path)) {
@@ -46,4 +57,4 @@ Route::view('tos', 'partials.tos')
 Route::view('contact_us', 'partials.contact_us')
     ->name('contact_us');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
