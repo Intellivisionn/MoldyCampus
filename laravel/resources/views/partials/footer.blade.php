@@ -3,9 +3,9 @@
     <div class="container text-center">
         <!-- Links -->
         <div class="footer-links mb-3">
-            <a href="#" class="footer-link mx-3">Privacy Policy</a>
-            <a href="#" class="footer-link mx-3">Terms of Service</a>
-            <a href="#" class="footer-link mx-3">Contact Us</a>
+            <a href="{{ route('privacy-policy') }}" class="footer-link mx-3">Privacy Policy</a>
+            <a href="{{ route('tos') }}" class="footer-link mx-3">Terms of Service</a>
+            <a href="{{ route('contact_us') }}" class="footer-link mx-3">Contact Us</a>
         </div>
 
         <!-- Social Media Icons -->
