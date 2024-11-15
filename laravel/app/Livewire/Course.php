@@ -10,33 +10,32 @@ use Illuminate\Support\Facades\Auth;
 class Course extends Component
 {
     public $courseId;
-
     public $isModalOpen = false;
-    public $categoryScores = [];
+    public $categoryScores = [
+        'overall' => 0,
+        'course_material' => 0,
+        'interactivity' => 0,
+        'technology' => 0,
+    ];
     public $reviewText = '';
-    public $review = null;
+    public $review;
 
-    public function mount($courseId) //should add this mount so we can get the id each time
+    public function mount($courseId)
     {
         $this->courseId = $courseId;
 
-        $this->review = $this->getReview();
+        // Check if the user has already reviewed this course
+        $this->review = CourseRating::where('course_id', $this->courseId)
+                                     ->where('user_id', auth()->id())
+                                     ->first();
+
+        // If a review already exists, load its details
         if ($this->review) {
-            $this->categoryScores = [
-                'overall' => $this->review['rating'],
-                'course_material' => 0,
-                'interactivity' => 0,
-                'technology' => 0,
-            ];
-            $this->reviewText = $this->review['review'];
-        } else {
-            $this->categoryScores = [
-                'overall' => 0,
-                'course_material' => 0,
-                'interactivity' => 0,
-                'technology' => 0,
-            ];
-            $this->reviewText = '';
+            $this->categoryScores['overall'] = $this->review->rating;
+            $this->categoryScores['course_material'] = $this->review->course_material ?? 0;
+            $this->categoryScores['interactivity'] = $this->review->interactivity ?? 0;
+            $this->categoryScores['technology'] = $this->review->technology ?? 0;
+            $this->reviewText = $this->review->review;
         }
     }
 
@@ -56,13 +55,8 @@ class Course extends Component
 
         $professors = $course ? $course->professors()->get()->toArray() : []; //list of professors
 
-        $reviewsCount = 0;
-        $allReviews = 0;
-        foreach ($reviews as $review) {
-            $reviewsCount += 1;
-            $allReviews += $review['rating'];
-        }
-
+        $reviewsCount = count($reviews);
+        $allReviews = array_sum(array_column($reviews, 'rating'));
         $finalRating = $reviewsCount > 0 ? round($allReviews / $reviewsCount, 2) : 0;
 
         return view('livewire.course', [
@@ -99,18 +93,21 @@ class Course extends Component
     {
         if ($this->review) {
             $this->review->rating = $this->categoryScores['overall'];
+            // $this->review->course_material = $this->categoryScores['course_material'];
+            // $this->review->interactivity = $this->categoryScores['interactivity'];
+            // $this->review->technology = $this->categoryScores['technology'];
             $this->review->review = $this->reviewText;
             $this->review->save();
         } else {
-            $courseRating = new CourseRating();
-            $courseRating->course_id = $this->courseId;
-            $courseRating->user_id = auth()->id();
-            $courseRating->rating = $this->categoryScores['overall'];
-            // $courseRating->course_material = $this->categoryScores['course_material'];
-            // $courseRating->interactivity = $this->categoryScores['interactivity'];
-            // $courseRating->technology = $this->categoryScores['technology'];
-            $courseRating->review = $this->reviewText;
-            $courseRating->save();
+            CourseRating::create([
+                'course_id' => $this->courseId,
+                'user_id' => auth()->id(),
+                'rating' => $this->categoryScores['overall'],
+                'course_material' => $this->categoryScores['course_material'],
+                'interactivity' => $this->categoryScores['interactivity'],
+                'technology' => $this->categoryScores['technology'],
+                'review' => $this->reviewText,
+            ]);
         }
         $this->closeModal();
     }

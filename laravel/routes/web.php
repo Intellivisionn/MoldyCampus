@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('homepage');
@@ -19,6 +20,10 @@ Route::view('dashboard', 'homepage')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware(['auth'])->group(function () {
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
 
 Route::get('course/{courseId}', function ($courseId) {
     return view('course.show', compact('courseId'));

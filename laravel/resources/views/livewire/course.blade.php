@@ -30,9 +30,8 @@
                                 @endif
                             @endforeach
                         @else
-                            <h2>No Ratings</h2>
+                            <h2>No Reviews</h2>
                         @endif
-
                     </div>
                 </div>
             </div>
@@ -42,7 +41,7 @@
                 <div class="d-flex justify-content-center flex-grow-1 flex-column"
                     style="flex-basis: 16.67%; padding-left: 4vw;">
                     <span class='fw-bold'>
-                        <h1>{{ $course->name }}</h2>
+                        <h1>{{ $course->name }}</h1>
                     </span>
                     <h5>Course ID: {{ $course->code }}</h5>
                 </div>
@@ -78,8 +77,8 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center flex-grow-1 flex-column" style="flex-basis: 35%;">
-                    <div class="d-flex flex-grow-1 justify-content-between">
-                        @if (count($reviews) > 0)
+                    @if (count($reviews) > 0)
+                        <div class="d-flex flex-grow-1 justify-content-between">
                             <h4 class="mb-3">
                                 @for ($i = 0; $i < floor($finalRating); $i++)
                                     <i class="fa-solid fa-star"></i>
@@ -91,41 +90,39 @@
                                 {{ $finalRating }} / 5
                             </h4>
                             <h4>#143</h4>
+                        </div>
+                        <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Course material&emsp;
+                                @for ($i = 0; $i < floor($finalRating); $i++)
+                                    <i class="fa-solid fa-star"></i>
+                                @endfor
 
-                    </div>
-                    <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
-                        <p class="mb-0">Course material&emsp;
-                            @for ($i = 0; $i < floor($finalRating); $i++)
-                                <i class="fa-solid fa-star"></i>
-                            @endfor
+                                @for ($i = 0; $i < 5 - floor($finalRating); $i++)
+                                    <i class="fa-regular fa-star"></i>
+                                @endfor
+                            </p>
+                            <p class="mb-0">Interactivity&emsp;
+                                @for ($i = 0; $i < floor($finalRating); $i++)
+                                    <i class="fa-solid fa-star"></i>
+                                @endfor
 
-                            @for ($i = 0; $i < 5 - floor($finalRating); $i++)
-                                <i class="fa-regular fa-star"></i>
-                            @endfor
-                        </p>
-                        <p class="mb-0">Interactivity&emsp;
-                            @for ($i = 0; $i < floor($finalRating); $i++)
-                                <i class="fa-solid fa-star"></i>
-                            @endfor
+                                @for ($i = 0; $i < 5 - floor($finalRating); $i++)
+                                    <i class="fa-regular fa-star"></i>
+                                @endfor
+                            </p>
+                            <p class="mb-0">Use of technology&emsp;
+                                @for ($i = 0; $i < floor($finalRating); $i++)
+                                    <i class="fa-solid fa-star"></i>
+                                @endfor
 
-                            @for ($i = 0; $i < 5 - floor($finalRating); $i++)
-                                <i class="fa-regular fa-star"></i>
-                            @endfor
-                        </p>
-                        <p class="mb-0">Use of technology&emsp;
-                            @for ($i = 0; $i < floor($finalRating); $i++)
-                                <i class="fa-solid fa-star"></i>
-                            @endfor
-
-                            @for ($i = 0; $i < 5 - floor($finalRating); $i++)
-                                <i class="fa-regular fa-star"></i>
-                            @endfor
-                        </p>
-                    </div>
-                @else
-                    <h2>No ratings</h2>
+                                @for ($i = 0; $i < 5 - floor($finalRating); $i++)
+                                    <i class="fa-regular fa-star"></i>
+                                @endfor
+                            </p>
+                        </div>
+                    @else
+                        <h2>No ratings</h2>
                     @endif
-                    </p>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center flex-grow-1" style="flex-basis: 15%;">
@@ -212,13 +209,12 @@
                 </div>
             </div>
         </div>
+        <style>
+            /* Ensure the background overlay effect */
+            .modal.show.d-block {
+                display: block;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        </style>
     @endif
-
-    <style>
-        /* Ensure the background overlay effect */
-        .modal.show.d-block {
-            display: block;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-    </style>
 </div>
