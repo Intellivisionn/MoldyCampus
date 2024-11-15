@@ -136,7 +136,11 @@
                     <div style="height: 10px"></div>
                     <div class="d-flex justify-content-center flex-grow-1" style="flex-basis: 15%;">
                         <button type="button" class="btn btn-outline-secondary w-100" wire:click="openModal">
-                            Add Rating
+                            @if ($review)
+                                Your Rating
+                            @else
+                                Add Rating
+                            @endif
                         </button>
                     </div>
                 @endif

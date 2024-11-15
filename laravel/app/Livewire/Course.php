@@ -128,5 +128,6 @@ class Course extends Component
             ];
             $this->reviewText = '';
         }
+        $this->closeModal();
     }
 }
