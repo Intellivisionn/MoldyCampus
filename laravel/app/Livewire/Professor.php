@@ -27,7 +27,7 @@ class Professor extends Component
             $totalRatings++;
             $totalRatingPoints += $review['rating'];
         }
-        $averageRating = $totalRatings > 0 ? $totalRatingPoints / $totalRatings : 0;
+        $averageRating = $totalRatings > 0 ? round($totalRatingPoints / $totalRatings, 2) : 0;
 
         return view('livewire.professor', [
             'professor' => $professor,

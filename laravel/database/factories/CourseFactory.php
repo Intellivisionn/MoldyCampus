@@ -16,6 +16,7 @@ class CourseFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'image_path' => $this->faker->imageUrl(),
+            'code' => 'T' . $this->faker->regexify('[0-9]{6}'),
             'created_at' => now(),
             'updated_at' => now(),
         ];

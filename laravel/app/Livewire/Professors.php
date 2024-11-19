@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Professors extends Component
 {
-    public $category = 'most_popular';
+    public $category = 'top_rated';
 
     public $itemsPerPage = 4;
 
@@ -24,8 +24,8 @@ class Professors extends Component
             'professors' => $professors,
             'category' => $this->category,
             'categories' => [
-                'most_popular' => 'Most Reviewed',
-                'most_liked' => 'Most Liked',
+                'top_rated' => 'Top Rated',
+                'most_reviewed' => 'Most Reviewed',
             ],
             'defaultImage' => asset('images/professors/no-image.jpg'),
         ]);
@@ -34,19 +34,23 @@ class Professors extends Component
     private function getProfessorsByCategory($category)
     {
         switch ($category) {
-            case 'most_popular':
+            case 'top_rated':
+                return Professor::with(['courses' => function ($query) {
+                    $query->with('reviews');
+                }])
+                ->get()
+                ->sortByDesc(function ($professor) {
+                    $totalRating = $professor->courses->sum(function ($course) {
+                        return $course->reviews->avg('rating');
+                    });
+                    $totalCourses = $professor->courses->count();
+                    return $totalCourses ? $totalRating / $totalCourses : 0;
+                })
+                ->take($this->itemsPerPage);
+
+            case 'most_reviewed':
                 return Professor::withCount(['courses as reviews_count' => function ($query) {
                     $query->withCount('reviews');
-                }])
-                    ->orderBy('reviews_count', 'desc')
-                    ->take($this->itemsPerPage)
-                    ->get();
-
-            case 'most_liked':
-                return Professor::withCount(['courses as reviews_count' => function ($query) {
-                    $query->whereHas('reviews', function ($query) {
-                        $query->where('rating', '>', 3); // Assuming rating > 3 is considered a 'like'
-                    });
                 }])
                     ->orderBy('reviews_count', 'desc')
                     ->take($this->itemsPerPage)

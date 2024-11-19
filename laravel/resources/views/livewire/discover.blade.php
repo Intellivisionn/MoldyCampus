@@ -16,7 +16,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="text-center card-title text-truncate">{{ $course->name }}</h5>
                                 <p class="card-text">{{ Str::limit($course->description, 50) }}</p>
-                                <a href="#" class="mt-auto btn btn-outline-primary rounded-pill">More
+                                <a href="{{ url('course/' . $course->id) }}" class="mt-auto btn btn-outline-primary rounded-pill">More
                                     Information</a>
                             </div>
                         </div>

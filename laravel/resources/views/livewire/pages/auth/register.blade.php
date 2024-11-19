@@ -49,7 +49,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('homepage', absolute: false), navigate: true);
     }
 };
 ?>
@@ -86,12 +86,12 @@ new #[Layout('layouts.guest')] class extends Component {
         </div>
 
         <!-- Profile Picture -->
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <x-input-label for="profile_picture" :value="__('Profile Picture')" />
             <input wire:model="profile_picture" id="profile_picture" class="block mt-1 w-full" type="file"
                 name="profile_picture" accept="image/*" />
             <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
-        </div>
+        </div> --}}
 
         <!-- Password -->
         <div class="mt-4">

@@ -14,7 +14,7 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'image_path'];
+    protected $fillable = ['name', 'description', 'image_path', 'code'];
 
     /**
      * The professors that teach the course.

@@ -1,8 +1,8 @@
 <div>
     <!-- Category Buttons -->
     <div class="mt-3 d-flex justify-content-center">
-        <button wire:click="setCategory('most_popular')" class="btn btn-outline-secondary me-2">Most Popular</button>
-        <button wire:click="setCategory('most_liked')" class="btn btn-outline-secondary">Most Liked</button>
+        <button wire:click="setCategory('top_rated')" class="btn btn-outline-secondary me-2">Top Rated</button>
+        <button wire:click="setCategory('most_reviewed')" class="btn btn-outline-secondary me-2">Most Reviewed</button>
     </div>
 
     <!-- Professors Section -->

@@ -14,7 +14,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title text-truncate">{{ $professor->name }}</h5>
                                 <p class="card-text">{{ $professor->title }}</p>
-                                <a href="#" class="mt-auto btn btn-outline-primary rounded-pill">More
+                                <a href="{{ url('professor/' . $professor->id) }}" class="mt-auto btn btn-outline-primary rounded-pill">More
                                     Information</a>
                             </div>
                         </div>

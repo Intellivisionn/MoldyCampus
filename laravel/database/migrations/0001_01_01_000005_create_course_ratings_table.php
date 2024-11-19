@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->float('rating', 2, 1)->check('rating >= 0 and rating <= 5');
-            $table->text('review')->nullable();
+            $table->string('review', 100)->nullable();
             $table->timestamps();
         });
     }
