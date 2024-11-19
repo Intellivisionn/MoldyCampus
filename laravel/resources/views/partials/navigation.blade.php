@@ -16,9 +16,7 @@
                     <a class="nav-link" href="{{ '/discoverprofessors' }}">Professors</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
+            @include('livewire.search')
             @if (auth()->check())
                 <!-- Settings Dropdown -->
                 <div class="d-flex align-items-center ms-3">
