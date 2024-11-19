@@ -1,32 +1,42 @@
 <x-app-layout>
-    <div>
-        <div class="container">
-            <h1>Search Results</h1>
+    <div class="text-center">
+        <h1 class="mb-6 text-2xl font-bold">Search Results</h1>
 
-            @if (!empty($results))
-                <div class="mt-3">
-                    <h5>Courses</h5>
-                    <ul class="list-group">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+                <h5 class="text-lg font-semibold">Courses</h5>
+                <ul class="list-none">
+                    @if (!empty($results['courses']) && $results['courses']->isNotEmpty())
                         @foreach ($results['courses'] as $course)
-                            <li class="list-group-item">
+                            <li class="mb-4">
                                 <strong>{{ $course->name }}</strong> ({{ $course->code }})
                                 <p>{{ $course->description }}</p>
                             </li>
                         @endforeach
-                    </ul>
+                    @else
+                        <li>
+                            <p>No courses found.</p>
+                        </li>
+                    @endif
+                </ul>
+            </div>
 
-                    <h5 class="mt-3">Professors</h5>
-                    <ul class="list-group">
+            <div>
+                <h5 class="text-lg font-semibold">Professors</h5>
+                <ul class="list-none">
+                    @if (!empty($results['professors']) && $results['professors']->isNotEmpty())
                         @foreach ($results['professors'] as $professor)
-                            <li class="list-group-item">
+                            <li class="mb-4">
                                 <strong>{{ $professor->name }}</strong> ({{ $professor->title }})
                             </li>
                         @endforeach
-                    </ul>
-                </div>
-            @else
-                <p>No results found.</p>
-            @endif
+                    @else
+                        <li>
+                            <p>No professors found.</p>
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
     </div>
 </x-app-layout>
