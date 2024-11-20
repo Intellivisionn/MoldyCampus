@@ -35,12 +35,11 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
 
-            @if (auth()->user()->profile_picture)
-                <div class="mt-3">
-                    <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Current Profile Picture" class="img-thumbnail" style="max-width: 150px;">
-                    <p class="mt-2 text-sm text-muted">Current Profile Picture</p>
-                </div>
-            @endif
+            <div class="mt-3">
+                <img src="{{ auth()->user()->profile_picture ? ('/storage/' . auth()->user()->profile_picture) : ('/storage/profile_pictures/default.png') }}" alt="Current Profile Picture" class="img-thumbnail" style="max-width: 150px;">
+                <p class="mt-2 text-sm text-muted">Current Profile Picture</p>
+            </div>
+            
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>

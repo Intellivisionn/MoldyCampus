@@ -23,7 +23,7 @@
                                     <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%; max-width: 20vw;">
                                         <div class="card-body">
                                             <p class="card-text"> 
-                                                <img src="{{ '/storage/' . $review['profile_picture']}}" 
+                                                <img src="{{ $review['profile_picture'] ? ('/storage/' . $review['profile_picture']) : ('/storage/profile_pictures/default.png')}}" 
                                                     alt="Profile Picture" 
                                                     class="rounded-circle" 
                                                     style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">

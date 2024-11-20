@@ -25,7 +25,7 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="btn btn-outline-secondary d-flex align-items-center">
-                            <img src="{{ '/storage/' . auth()->user()->profile_picture}}" 
+                            <img src="{{ auth()->user()->profile_picture ? ('/storage/' . auth()->user()->profile_picture) : ('/storage/profile_pictures/default.png')}}" 
                                 alt="Profile Picture" 
                                 class="rounded-circle" 
                                 style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
