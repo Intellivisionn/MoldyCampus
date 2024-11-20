@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form method='POST' action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method='POST' action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -26,6 +26,21 @@
             @error('email')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="profile_picture" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
+            @error('profile_picture')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+
+            @if (auth()->user()->profile_picture)
+                <div class="mt-3">
+                    <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Current Profile Picture" class="img-thumbnail" style="max-width: 150px;">
+                    <p class="mt-2 text-sm text-muted">Current Profile Picture</p>
+                </div>
+            @endif
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
