@@ -22,7 +22,12 @@
                                 @if (!empty($review['review']))
                                     <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%; max-width: 20vw;">
                                         <div class="card-body">
-                                            <p class="card-text"> {{ $review['student_name'] }}&emsp;
+                                            <p class="card-text"> 
+                                                <img src="{{ '/storage/' . $review['profile_picture']}}" 
+                                                    alt="Profile Picture" 
+                                                    class="rounded-circle" 
+                                                    style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
+                                                {{ $review['student_name'] }}&emsp;
                                                 {{ $review['rating'] }}/5</p>
                                             <p class="text-sm"> {{ $review['review'] }} </p>
                                         </div>

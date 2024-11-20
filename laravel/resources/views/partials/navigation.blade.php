@@ -24,7 +24,12 @@
                 <div class="d-flex align-items-center ms-3">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="btn btn-outline-secondary">
+                            <button class="btn btn-outline-secondary d-flex align-items-center">
+                            <img src="{{ '/storage/' . auth()->user()->profile_picture}}" 
+                                alt="Profile Picture" 
+                                class="rounded-circle" 
+                                style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
+
                                 <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
                                     x-on:profile-updated.window="name = $event.detail.name"></div>
                             </button>

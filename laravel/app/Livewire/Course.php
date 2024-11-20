@@ -50,6 +50,7 @@ class Course extends Component
                 'rating' => $review->rating,
                 'review' => $review->review,
                 'student_name' => $review->user->name,
+                'profile_picture'  => $review->user->profile_picture,
             ];
         })->toArray() : []; //return reviews with names of the users
 
