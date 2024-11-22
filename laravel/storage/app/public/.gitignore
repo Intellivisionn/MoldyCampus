@@ -1,2 +1,4 @@
 *
 !.gitignore
+!profile_pictures/
+!profile_pictures/**
