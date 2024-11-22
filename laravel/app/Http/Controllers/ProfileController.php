@@ -22,7 +22,20 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'profile_picture' => ['nullable', 'image', 'max:2048'],
         ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+    
+            // Delete the old profile picture if it exists
+            if ($user->profile_picture) {
+                \Storage::disk('public')->delete($user->profile_picture);
+            }
+    
+            // Save the new profile picture path
+            $validatedData['profile_picture'] = $profilePicturePath;
+        }
 
         // Update user information
         $user->update($validatedData);
