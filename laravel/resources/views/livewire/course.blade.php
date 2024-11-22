@@ -21,14 +21,16 @@
                             @foreach ($reviews as $review)
                                 @if (!empty($review['review']))
                                     <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%; max-width: 20vw;">
-                                        <div class="card-body">
-                                            <p class="card-text"> 
-                                                <img src="{{ $review['profile_picture'] ? ('/storage/' . $review['profile_picture']) : ('/storage/profile_pictures/default.png')}}" 
-                                                    alt="Profile Picture" 
-                                                    class="rounded-circle" 
-                                                    style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
-                                                {{ $review['student_name'] }}&emsp;
-                                                {{ $review['rating'] }}/5</p>
+                                        <div class="card-body d-flex flex-column justify-content-center">
+                                            <img src="{{ $review['profile_picture'] ? ('/storage/' . $review['profile_picture']) : ('/storage/profile_pictures/default.png')}}" 
+                                                alt="Profile Picture" 
+                                                class="rounded-circle mx-auto" 
+                                                style="width: 40px; height: 40px; object-fit: cover; margin-bottom: 10px;">
+                                            <h5 class="card-title">{{ $review['student_name'] }}</h5>
+                                            <p class="card-text">
+                                                {{ $review['rating'] }} / 5
+                                                <i class="fas fa-star" style="color: gold;"></i>
+                                            </p>
                                             <p class="text-sm"> {{ $review['review'] }} </p>
                                         </div>
                                     </div>
