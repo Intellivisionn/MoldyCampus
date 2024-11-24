@@ -5,37 +5,31 @@
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
                 <h5 class="text-lg font-semibold">Courses</h5>
-                <ul class="list-none">
                     @if (!empty($results['courses']) && $results['courses']->isNotEmpty())
                         @foreach ($results['courses'] as $course)
-                            <li class="mb-4">
-                                <strong>{{ $course->name }}</strong> ({{ $course->code }})
-                                <p>{{ $course->description }}</p>
-                            </li>
+                            <div class="mb-2">
+                                <a class="text-decoration-none" style="color: gray" href="{{ route('course.show', $course->id) }}">
+                                    <strong>{{ $course->name }}</strong> ({{ $course->code }})
+                                    <p>{{ $course->description }}</p>
+                                </a>
+                            </div>
                         @endforeach
                     @else
-                        <li>
                             <p>No courses found.</p>
-                        </li>
                     @endif
-                </ul>
             </div>
 
             <div>
                 <h5 class="text-lg font-semibold">Professors</h5>
-                <ul class="list-none">
                     @if (!empty($results['professors']) && $results['professors']->isNotEmpty())
                         @foreach ($results['professors'] as $professor)
-                            <li class="mb-4">
+                            <div class="mb-2"><a class="text-decoration-none"style="color: gray" href="{{ route('professor.show', $professor->id) }}">
                                 <strong>{{ $professor->name }}</strong> ({{ $professor->title }})
-                            </li>
+                            </div></a>
                         @endforeach
                     @else
-                        <li>
                             <p>No professors found.</p>
-                        </li>
                     @endif
-                </ul>
             </div>
         </div>
     </div>
