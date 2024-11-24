@@ -8,17 +8,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage');
-});
+})->name('homepage');
 
 Route::get('/search-results', [SearchController::class, 'show'])->name('search.results');
 
-Route::view('discover', 'discover');
+Route::view('courses', 'discover')->name('courses');
 
-Route::view('discoverprofessors', 'discoverProfessors');
-
-Route::view('dashboard', 'homepage')
-    ->middleware(['auth', 'verified'])
-    ->name('homepage');
+Route::view('professors', 'discoverProfessors')->name('professors');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -29,12 +25,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('course/{courseId}', function ($courseId) {
-    return view('course.show', compact('courseId'));
-})->name('course.show');
+    return view('pages.course.show', compact('courseId'));
+});
 
 Route::get('professor/{professorId}', function ($professorId) {
-    return view('professor.show', compact('professorId'));
-})->name('professor.show');
+    return view('pages.professor.show', compact('professorId'));
+});
 
 Route::get('/images/courses/{filename}', function ($filename) {
     $path = storage_path('app/public/courses/'.$filename);
@@ -56,13 +52,13 @@ Route::get('/images/courses/{filename}', function ($filename) {
 Route::get('/images/courses', function () {
     abort(404, 'Filename not provided');
 });
-Route::view('privacy-policy', 'partials.privacy-policy')
+Route::view('privacy-policy', 'pages.privacy-policy')
     ->name('privacy-policy');
 
-Route::view('tos', 'partials.tos')
+Route::view('tos', 'pages.tos')
     ->name('tos');
 
-Route::view('contact_us', 'partials.contact_us')
+Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
 
 require __DIR__.'/auth.php';
