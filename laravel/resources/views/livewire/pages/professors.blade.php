@@ -1,5 +1,4 @@
 <div>
-
     <!-- Professors Section -->
     <div class="mt-4">
         <h2 class="mb-4 text-center"> Browse Professors </h2>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ProfileController extends Controller
+class ProfileController
 {
     /**
      * Update the authenticated user's profile information.

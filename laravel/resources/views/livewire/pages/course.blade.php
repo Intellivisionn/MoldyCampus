@@ -150,7 +150,7 @@
                 @endif
             </div>
         </div>
-    </div><!-- resources/views/livewire/star-rating.blade.php -->
+    </div>
 
     <!-- Modal Structure -->
     @if ($isModalOpen)

@@ -5,22 +5,19 @@ use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Pages\Courses;
 
 Route::get('/', function () {
-    return view('homepage');
-});
+    return view('pages.homepage');
+})->name('homepage');
 
 Route::get('/search-results', [SearchController::class, 'show'])->name('search.results');
 
-Route::view('discover', 'discover');
+Route::view('courses', 'pages.courses')->name('courses');
 
-Route::view('discoverprofessors', 'discoverProfessors');
+Route::view('professors', 'pages.professors')->name('professors');
 
-Route::view('dashboard', 'homepage')
-    ->middleware(['auth', 'verified'])
-    ->name('homepage');
-
-Route::view('profile', 'profile')
+Route::view('profile', 'pages.profile')
     ->middleware(['auth'])
     ->name('profile');
 
@@ -29,11 +26,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('course/{courseId}', function ($courseId) {
-    return view('course.show', compact('courseId'));
+    return view('pages.course.show', compact('courseId'));
 })->name('course.show');
 
 Route::get('professor/{professorId}', function ($professorId) {
-    return view('professor.show', compact('professorId'));
+    return view('pages.professor.show', compact('professorId'));
 })->name('professor.show');
 
 Route::get('/images/courses/{filename}', function ($filename) {
@@ -56,13 +53,13 @@ Route::get('/images/courses/{filename}', function ($filename) {
 Route::get('/images/courses', function () {
     abort(404, 'Filename not provided');
 });
-Route::view('privacy-policy', 'partials.privacy-policy')
+Route::view('privacy-policy', 'pages.privacy-policy')
     ->name('privacy-policy');
 
-Route::view('tos', 'partials.tos')
+Route::view('tos', 'pages.tos')
     ->name('tos');
 
-Route::view('contact_us', 'partials.contact_us')
+Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
 
 require __DIR__.'/auth.php';

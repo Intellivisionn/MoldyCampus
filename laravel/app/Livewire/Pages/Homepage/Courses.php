@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages\Homepage;
 
 use App\Models\Course;
 use Livewire\Component;
@@ -20,7 +20,7 @@ class Courses extends Component
     {
         $courses = $this->getCoursesByCategory($this->category);
 
-        return view('livewire.courses', [
+        return view('livewire.pages.homepage.courses')->with([
             'courses' => $courses,
             'category' => $this->category,
             'categories' => [

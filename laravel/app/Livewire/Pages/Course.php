@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use App\Models\Course as c;
 use Livewire\Component;
@@ -60,7 +60,7 @@ class Course extends Component
         $allReviews = array_sum(array_column($reviews, 'rating'));
         $finalRating = $reviewsCount > 0 ? round($allReviews / $reviewsCount, 2) : 0;
 
-        return view('livewire.course', [
+        return view('livewire.pages.course', [
             'course' => $course,
             //'defaultImage' => asset('images/courses/no-image.jpg'),
             'reviews' => $reviews,
@@ -100,7 +100,7 @@ class Course extends Component
             $this->review->review = $this->reviewText;
             $this->review->save();
         } else {
-            CourseRating::create([
+            $this->review = CourseRating::create([
                 'course_id' => $this->courseId,
                 'user_id' => auth()->id(),
                 'rating' => $this->categoryScores['overall'],
