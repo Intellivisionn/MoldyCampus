@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages\Homepage;
 
 use App\Models\Professor;
 use Livewire\Component;
@@ -20,7 +20,7 @@ class Professors extends Component
     {
         $professors = $this->getProfessorsByCategory($this->category);
 
-        return view('livewire.professors', [
+        return view('livewire.pages.homepage.professors', [
             'professors' => $professors,
             'category' => $this->category,
             'categories' => [

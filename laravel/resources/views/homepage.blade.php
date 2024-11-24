@@ -35,10 +35,10 @@
             
 
         <!-- Featured Courses loaded -->
-        @livewire('courses')
+        @livewire('pages.homepage.courses')
 
         <!-- Professors Section -->
-        @livewire('professors')
+        @livewire('pages.homepage.professors')
 
         @livewireScripts
         
