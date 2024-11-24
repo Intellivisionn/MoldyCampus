@@ -35,7 +35,10 @@ new class extends Component {
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
                 </ul>
-                @include('livewire.search')
+                <form class="d-flex" action="{{ route('search.results') }}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
+                        value="{{ old('query') }}">
+                </form>
                 @if (auth()->check())
                     <!-- Settings Dropdown -->
                     <div class="d-flex align-items-center ms-3">

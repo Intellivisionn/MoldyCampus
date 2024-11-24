@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 
 use Livewire\Component;
@@ -29,7 +29,7 @@ class Professor extends Component
         }
         $averageRating = $totalRatings > 0 ? round($totalRatingPoints / $totalRatings, 2) : 0;
 
-        return view('livewire.professor', [
+        return view('livewire.pages.professor', [
             'professor' => $professor,
             'courses' => $courses,
             'finalRating' => $averageRating,

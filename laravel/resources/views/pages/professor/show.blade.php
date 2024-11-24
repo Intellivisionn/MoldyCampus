@@ -1,4 +1,4 @@
 <x-app-layout>
-    <livewire:professor :professorId="$professorId" />
-        @livewireScripts
+    <livewire:pages.professor :professorId="$professorId" />
+    @livewireScripts
 </x-app-layout>
