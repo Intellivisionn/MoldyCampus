@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use App\Models\Course;
 use Livewire\Component;
 
-class Discover extends Component
+class Courses extends Component
 {
     public $currentPage = 1;
 
@@ -29,7 +29,7 @@ class Discover extends Component
     {
         $courses = $this->getCourses();
 
-        return view('livewire.discover', [
+        return view('livewire.pages.courses', [
             'courses' => $courses,
             'defaultImage' => asset('images/courses/no-image.jpg'),
         ]);

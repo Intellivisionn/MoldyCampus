@@ -6,7 +6,7 @@ use App\Models\Course;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+class SearchController
 {
     public function show(Request $request)
     {
@@ -25,6 +25,6 @@ class SearchController extends Controller
             ];
         }
 
-        return view('search-results', compact('results'));
+        return view('pages.search-results', compact('results'));
     }
 }

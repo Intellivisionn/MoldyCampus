@@ -5,18 +5,19 @@ use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Pages\Courses;
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('pages.homepage');
 })->name('homepage');
 
 Route::get('/search-results', [SearchController::class, 'show'])->name('search.results');
 
-Route::view('courses', 'discover')->name('courses');
+Route::view('courses', 'pages.courses')->name('courses');
 
-Route::view('professors', 'discoverProfessors')->name('professors');
+Route::view('professors', 'pages.professors')->name('professors');
 
-Route::view('profile', 'profile')
+Route::view('profile', 'pages.profile')
     ->middleware(['auth'])
     ->name('profile');
 
@@ -26,11 +27,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('course/{courseId}', function ($courseId) {
     return view('pages.course.show', compact('courseId'));
-});
+})->name('course.show');
 
 Route::get('professor/{professorId}', function ($professorId) {
     return view('pages.professor.show', compact('professorId'));
-});
+})->name('professor.show');
 
 Route::get('/images/courses/{filename}', function ($filename) {
     $path = storage_path('app/public/courses/'.$filename);
