@@ -34,6 +34,10 @@ new class extends Component {
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
+                    <li class="nav-item">
+                        @if (auth()->check() && auth()->user()->is_admin)
+                            <a class="nav-link" href="{{ route('admin') }}">Admin</a>
+                        @endif
                 </ul>
                 <form class="d-flex" action="{{ route('search.results') }}" method="GET">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
