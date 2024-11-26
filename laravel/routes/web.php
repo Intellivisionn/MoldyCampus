@@ -18,7 +18,7 @@ Route::view('courses', 'pages.courses')->name('courses');
 Route::view('professors', 'pages.professors')->name('professors');
 
 Route::view('admin', 'pages.admin')
-->middleware(['auth'])
+->middleware(['auth', 'can:access-admin'])
 ->name('admin');
 
 Route::view('profile', 'pages.profile')
