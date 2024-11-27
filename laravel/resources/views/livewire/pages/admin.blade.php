@@ -10,28 +10,28 @@
         <!-- Flex container for side-by-side layout -->
         <div class="flex flex-wrap gap-6 justify-between">
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
+                <div class="flex items-center justify-between">
                     <h4>Add Course</h4>
+                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                        +
+                    </button>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    +
-                </button>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
-                    <h4>Add Course</h4>
+                <div class="flex items-center justify-between">
+                    <h4>Add Lecturer</h4>
+                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                        +
+                    </button>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    +
-                </button>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
-                    <h4>Add Course</h4>
+                <div class="flex items-center justify-between">
+                    <h4>Add Student</h4>
+                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                        +
+                    </button>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    +
-                </button>
             </div>
         </div>
     </div>
@@ -39,28 +39,22 @@
         <!-- Flex container for side-by-side layout -->
         <div class="flex flex-wrap gap-6 justify-between">
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
+                <div class="flex items-center justify-between">
                     <h4>Total Users</h4>
+                    <span class="text-2xl font-bold">120</span>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    120
-                </button>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
+                <div class="flex items-center justify-between">
                     <h4>Total Courses</h4>
+                    <span class="text-2xl font-bold">30</span>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    30
-                </button>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
-                <div class="max-w-xl">
+                <div class="flex items-center justify-between">
                     <h4>Total Lecturers</h4>
+                    <span class="text-2xl font-bold">30</span>
                 </div>
-                <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded mt-4">
-                    30
-                </button>
             </div>
         </div>
     </div>
