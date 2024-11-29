@@ -17,9 +17,12 @@ Route::view('courses', 'pages.courses')->name('courses');
 
 Route::view('professors', 'pages.professors')->name('professors');
 
-Route::view('admin', 'pages.admin')
+Route::view('admin', 'pages.admin.admin_panel')
 ->middleware(['auth', 'can:access-admin'])
 ->name('admin');
+Route::view('addCourse', 'pages.admin.add_course')
+->middleware(['auth', 'can:access-admin'])
+->name('addCourse');
 
 Route::view('profile', 'pages.profile')
     ->middleware(['auth'])

@@ -12,9 +12,9 @@
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
                     <h4>Add Course</h4>
-                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                    <a href="{{ route('addCourse') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
                         +
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
@@ -27,8 +27,8 @@
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
-                    <h4>Add Student</h4>
-                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                    <h4>Manage Admins</h4>
+                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded appearance-none focus:outline-none">
                         +
                     </button>
                 </div>
