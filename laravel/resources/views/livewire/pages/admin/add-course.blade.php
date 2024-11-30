@@ -37,6 +37,19 @@
             @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
+
+        <!-- Course Picture NEED TO MAKE WORK -->
+        <div class="mb-3">
+            <label for="course_picture" class="form-label">Course Picture</label>
+            <input type="file" wire:model="course_picture" class="form-control @error('course_picture') is-invalid @enderror" id="course_picture" accept="image/*">
+            @error('course_picture') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
+            @if ($course_picture)
+                <div class="mt-2">
+                    <img src="{{ $course_picture->temporaryUrl() }}" alt="Course Picture" class="h-20">
+                </div>
+            @endif
+        </div>
        
 
         <!-- Submit Button -->

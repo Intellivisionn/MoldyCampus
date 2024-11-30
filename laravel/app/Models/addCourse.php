@@ -13,8 +13,8 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->text('description');
-            //$table->string('profile_picture')->nullable();
-            //$table->timestamps();
+            $table->string('profile_picture')->nullable();
+            $table->timestamps();
         });
     }
 
