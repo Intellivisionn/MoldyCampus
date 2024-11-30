@@ -22,7 +22,7 @@ Route::view('admin', 'pages.admin.admin')
 ->middleware(['auth', 'can:access-admin'])
 ->name('admin');
 
-Route::view('addCourse', 'pages.admin.add_course')
+Route::view('addCourse', 'pages.admin.add-course')
 ->middleware(['auth', 'can:access-admin'])
 ->name('addCourse');
 
