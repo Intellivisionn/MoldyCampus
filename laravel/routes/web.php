@@ -29,6 +29,10 @@ Route::view('addLecturer', 'pages.admin.add_lecturer')
 ->middleware(['auth', 'can:access-admin'])
 ->name('addLecturer');
 
+Route::view('manageAdmins', 'pages.admin.manage_admins')
+->middleware(['auth', 'can:access-admin'])
+->name('manageAdmins');
+
 Route::view('profile', 'pages.profile')
     ->middleware(['auth'])
     ->name('profile');
