@@ -28,9 +28,9 @@
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
                     <h4>Manage Admins</h4>
-                    <button class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded appearance-none focus:outline-none">
+                    <a href="{{ route('manageAdmins') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
                         +
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -41,19 +41,19 @@
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
                     <h4>Total Users</h4>
-                    <span class="text-2xl font-bold">120</span>
+                    <span class="text-2xl font-bold">{{ $userCount }}</span>
                 </div>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
                     <h4>Total Courses</h4>
-                    <span class="text-2xl font-bold">30</span>
+                    <span class="text-2xl font-bold">{{ $courseCount }}</span>
                 </div>
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
                     <h4>Total Lecturers</h4>
-                    <span class="text-2xl font-bold">30</span>
+                    <span class="text-2xl font-bold">{{ $professorCount }}</span>
                 </div>
             </div>
         </div>

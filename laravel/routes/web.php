@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\Courses;
 
+
 Route::get('/', function () {
     return view('pages.homepage');
 })->name('homepage');
@@ -17,7 +18,7 @@ Route::view('courses', 'pages.courses')->name('courses');
 
 Route::view('professors', 'pages.professors')->name('professors');
 
-Route::view('admin', 'pages.admin.admin_panel')
+Route::view('admin', 'pages.admin.admin')
 ->middleware(['auth', 'can:access-admin'])
 ->name('admin');
 
