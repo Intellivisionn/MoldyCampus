@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Admin;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Course;
+use App\Models\Professor;
 
 class AddCourse extends Component
 {
