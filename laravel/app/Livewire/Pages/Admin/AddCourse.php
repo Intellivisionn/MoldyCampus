@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Admin;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Course;
-use App\Models\Professor;
 
 class AddCourse extends Component
 {
@@ -24,26 +23,28 @@ class AddCourse extends Component
     ];
 
     public function submit()
-    {
-        $this->validate();
+{
+    $this->validate();
 
-        if ($this->course_picture) {
-            $imagePath = $this->course_picture->store('course_pictures', 'public');
-        } else {
-            $imagePath = null;
-        }
-
-        Course::create([
-            'name' => $this->name,
-            'code' => $this->code,
-            'description' => $this->description,
-            'image_path' => $imagePath,
-        ]);
-
-        $this->reset();
-
-        session()->flash('message', 'Course added successfully.');
+    if ($this->course_picture) {
+        $imagePath = $this->course_picture->store('images/courses', 'public');
+    } else {
+        $imagePath = null;
     }
+
+    // Create the course record
+    Course::create([
+        'name' => $this->name,
+        'code' => $this->code,
+        'description' => $this->description,
+        'image_path' => $imagePath,
+    ]);
+
+    // Reset properties after submission
+    $this->reset();
+
+    session()->flash('message', 'Course added successfully.');
+}
 
     public function render()
     {

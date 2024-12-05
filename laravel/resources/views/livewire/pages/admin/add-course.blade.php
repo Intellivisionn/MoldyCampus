@@ -10,9 +10,9 @@
     </header>
 
     @if (session()->has('message'))
-        <div class="mt-4 p-3 bg-green-100 text-green-700 rounded">
-            {{ session('message') }}
-        </div>
+    <div class="mt-4 p-3 bg-green-100 text-green-700 rounded">
+        {{ session('message') }}
+    </div>
     @endif
 
     <form wire:submit.prevent="submit" class="mt-6 space-y-6">
@@ -41,16 +41,29 @@
         <!-- Course Picture NEED TO MAKE WORK -->
         <div class="mb-3">
             <label for="course_picture" class="form-label">Course Picture</label>
-            <input type="file" wire:model="course_picture" class="form-control @error('course_picture') is-invalid @enderror" id="course_picture" accept="image/*">
-            @error('course_picture') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <input
+                type="file"
+                wire:model="course_picture"
+                class="form-control @error('course_picture') is-invalid @enderror"
+                id="course_picture"
+                accept="image/*">
+
+            @error('course_picture')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+
+            <div wire:loading wire:target="course_picture" class="text-gray-600 text-sm mt-1">
+                Uploading...
+            </div>
 
             @if ($course_picture)
-                <div class="mt-2">
-                    <img src="{{ $course_picture->temporaryUrl() }}" alt="Course Picture" class="h-20">
-                </div>
+            <div class="mt-2">
+                <!-- Display a temporary preview before submission -->
+                <img src="{{ $course_picture->temporaryUrl() }}" alt="Course Picture" class="h-20">
+            </div>
             @endif
         </div>
-       
+
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Submit</button>
