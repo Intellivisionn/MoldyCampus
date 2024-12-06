@@ -30,6 +30,18 @@
             @error('code') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
+        <div class="mb-4">
+            <label for="professors" class="form-label fw-bold">Assign Professors</label>
+            <select wire:model="selectedProfessors" class="form-select @error('selectedProfessors') is-invalid @enderror" id="professors" multiple size="5">
+                @foreach ($allProfessors as $prof)
+                <option value="{{ $prof->id }}">{{ $prof->name }}</option>
+                @endforeach
+            </select>
+            @error('selectedProfessors') <span class="invalid-feedback">{{ $message }}</span> @enderror
+            <small class="text-muted">Hold CTRL (Windows) or CMD (Mac) to select multiple professors.</small>
+        </div>
+
+
         <!-- Course Description -->
         <div class="mb-3">
             <label for="description" class="form-label">Course Description</label>

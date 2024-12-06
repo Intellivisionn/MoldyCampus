@@ -36,7 +36,7 @@ new class extends Component {
                     </li>
                     <li class="nav-item">
                         @if (auth()->check() && auth()->user()->is_admin)
-                            <a class="nav-link" href="{{ route('admin') }}">Admin</a>
+                            <a class="nav-link" href="{{ route('admin') }}">Staff Panel</a>
                         @endif
                 </ul>
                 <form class="d-flex" action="{{ route('search.results') }}" method="GET">

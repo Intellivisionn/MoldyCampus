@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg flex items-center justify-center">
             <div class="max-w-xl">
-                <h2>Admin Panel</h2>
+                <h2>Staff Panel</h2>
             </div>
         </div>
     </div>
