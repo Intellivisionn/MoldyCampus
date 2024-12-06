@@ -40,11 +40,29 @@
         </div>
 
         <div class="mb-3">
-            <label for="profile_picture" class="form-label">Profile Picture</label>
-            <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
+            <label for="lecturer_picture" class="form-label">lecturer Picture</label>
+            <input
+                type="file"
+                wire:model="lecturer_picture"
+                class="form-control @error('lecturer_picture') is-invalid @enderror"
+                id="lecturer_picture"
+                accept="image/*">
 
+            @error('lecturer_picture')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+
+            <div wire:loading wire:target="lecturer_picture" class="text-gray-600 text-sm mt-1">
+                Uploading...
+            </div>
+
+            @if ($lecturer_picture)
+            <div class="mt-2">
+                <!-- Display a temporary preview before submission -->
+                <img src="{{ $lecturer_picture->temporaryUrl() }}" alt="lecturer Picture" class="h-20">
+            </div>
+            @endif
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

@@ -12,22 +12,22 @@ class AddLecturer extends Component
 
     public $name;
     public $title;
-    public $image_path;
+    public $lecturer_picture;
     public $description;
 
     protected $rules = [
         'name' => 'required|string|max:255',
         'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'image_path' => 'nullable|image|max:1024',
+        'lecturer_picture' => 'nullable|image|max:1024',
     ];
 
     public function submit()
     {
         $this->validate();
 
-        if ($this->image_path) {
-            $imagePath = $this->image_path->store('image_paths', 'public');
+        if ($this->lecturer_picture) {
+            $imagePath = $this->lecturer_picture->store('images/lecturers', 'public');
         } else {
             $imagePath = null;
         }
@@ -36,7 +36,7 @@ class AddLecturer extends Component
             'name' => $this->name,
             'title' => $this->title,
             'description' => $this->description,
-            'image_path' => $imagePath,
+            'lecturer_picture' => $imagePath,
         ]);
 
         $this->reset();

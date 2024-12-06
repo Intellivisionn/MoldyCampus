@@ -7,7 +7,7 @@
                 @foreach ($professors as $professor)
                     <div class="col-md-3">
                         <div class="shadow-sm card h-100" style="background-color: rgba(255, 255, 255, 0); border: none;">
-                            <img src="{{ file_exists(public_path('images/professors/' . $professor->image_path)) ? asset('images/professors/' . $professor->image_path) : asset('images/professors/no-image.jpg') }}"
+                            <img src="{{ file_exists(public_path('storage/' . $professor->image_path)) ? asset('storage/' . $professor->image_path) : asset('images/professors/no-image.jpg') }}"
                                 class="mx-auto professor-card-img card-img-top img-fluid d-block rounded-circle"
                                 alt="{{ $professor->name }}" style="object-fit: cover; height: 200px;">
                             <div class="card-body d-flex flex-column">
