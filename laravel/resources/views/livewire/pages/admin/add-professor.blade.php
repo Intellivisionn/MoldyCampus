@@ -1,11 +1,11 @@
 <div>
     <header>
         <h2 class="text-lg font-medium text-black">
-            {{ __('Add Lecturer or Proffesor') }}
+            {{ __('Add Professor') }}
         </h2>
 
         <p class="mt-1 text-sm text-black">
-            {{ __("Enter Details to add a lecturer or proffesor") }}
+            {{ __("Enter Details to add a Proffesor") }}
         </p>
     </header>
 
@@ -40,26 +40,26 @@
         </div>
 
         <div class="mb-3">
-            <label for="lecturer_picture" class="form-label">lecturer Picture</label>
+            <label for="image_path" class="form-label">Professor Picture</label>
             <input
                 type="file"
-                wire:model="lecturer_picture"
-                class="form-control @error('lecturer_picture') is-invalid @enderror"
-                id="lecturer_picture"
+                wire:model="image_path"
+                class="form-control @error('image_path') is-invalid @enderror"
+                id="image_path"
                 accept="image/*">
 
-            @error('lecturer_picture')
+            @error('image_path')
             <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
 
-            <div wire:loading wire:target="lecturer_picture" class="text-gray-600 text-sm mt-1">
+            <div wire:loading wire:target="image_path" class="text-gray-600 text-sm mt-1">
                 Uploading...
             </div>
 
-            @if ($lecturer_picture)
+            @if ($image_path)
             <div class="mt-2">
                 <!-- Display a temporary preview before submission -->
-                <img src="{{ $lecturer_picture->temporaryUrl() }}" alt="lecturer Picture" class="h-20">
+                <img src="{{ $image_path->temporaryUrl() }}" alt="Professor Picture" class="h-20">
             </div>
             @endif
         </div>

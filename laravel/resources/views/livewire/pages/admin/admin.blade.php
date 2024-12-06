@@ -19,8 +19,8 @@
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
-                    <h4>Add Lecturer</h4>
-                    <a href="{{ route('addLecturer') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                    <h4>Add Professor</h4>
+                    <a href="{{ route('addProfessor') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
                         +
                     </a>
                 </div>
