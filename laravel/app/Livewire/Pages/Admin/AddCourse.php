@@ -55,6 +55,8 @@ class AddCourse extends Component
     public function render()
     {
         $allProfessors = Professor::orderBy('name', 'asc')->get();
+        $allCourses = Course::with('professors')->orderBy('name', 'asc')->get();
+
 
         return view('livewire.pages.admin.add-course', [
             'allProfessors' => $allProfessors,

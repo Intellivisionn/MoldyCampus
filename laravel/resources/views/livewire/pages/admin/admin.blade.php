@@ -27,8 +27,8 @@
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
-                    <h4>Manage Admins</h4>
-                    <a href="{{ route('manageAdmins') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
+                    <h4>Manage Courses and Professors</h4>
+                    <a href="{{ route('manage') }}" class="bg-gray-300 hover:bg-gray-200 text-black font-bold py-3 px-6 rounded">
                         +
                     </a>
                 </div>
