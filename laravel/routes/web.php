@@ -18,21 +18,35 @@ Route::view('courses', 'pages.courses')->name('courses');
 
 Route::view('professors', 'pages.professors')->name('professors');
 
+Route::view('realadmin', 'pages.realadmin.realadmin')
+    ->middleware(['auth', 'can:access-realadmin'])
+    ->name('realadmin');
+
+// routes for Jakub Potocky's extension
+Route::get('realadmin/edituser/{userId}', function ($userId) {
+    return view('pages.realadmin.edituser.show', compact('userId'));
+})->name('realadmin.edituser.show');
+
+Route::get('realadmin/editreview/{reviewId}', function ($reviewId) {
+    return view('pages.realadmin.editreview.show', compact('reviewId'));
+})->name('realadmin.editreview.show');
+//============================
+
 Route::view('admin', 'pages.admin.admin')
-->middleware(['auth', 'can:access-admin'])
-->name('admin');
+    ->middleware(['auth', 'can:access-admin'])
+    ->name('admin');
 
 Route::view('addCourse', 'pages.admin.add-course')
-->middleware(['auth', 'can:access-admin'])
-->name('addCourse');
+    ->middleware(['auth', 'can:access-admin'])
+    ->name('addCourse');
 
 Route::view('addLecturer', 'pages.admin.add-lecturer')
-->middleware(['auth', 'can:access-admin'])
-->name('addLecturer');
+    ->middleware(['auth', 'can:access-admin'])
+    ->name('addLecturer');
 
 Route::view('manageAdmins', 'pages.admin.manage_admins')
-->middleware(['auth', 'can:access-admin'])
-->name('manageAdmins');
+    ->middleware(['auth', 'can:access-admin'])
+    ->name('manageAdmins');
 
 Route::view('profile', 'pages.profile')
     ->middleware(['auth'])
@@ -51,7 +65,7 @@ Route::get('professor/{professorId}', function ($professorId) {
 })->name('professor.show');
 
 Route::get('/images/courses/{filename}', function ($filename) {
-    $path = storage_path('app/public/courses/'.$filename);
+    $path = storage_path('app/public/courses/' . $filename);
     $defaultPath = storage_path('app/public/courses/no-image.jpg');
 
     if (! File::exists($path)) {
@@ -79,4 +93,4 @@ Route::view('tos', 'pages.tos')
 Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

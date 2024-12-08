@@ -23,6 +23,18 @@
                         @foreach ($reviews as $review)
                         @if (!empty($review['review']))
                         <div class="mx-3 text-center card" style="flex: 1 1 auto; max-height: 100%; max-width: 20vw;">
+                            @if(auth()->check())
+                            @if(auth()->user()->realadmin)
+                            <div class="position-absolute top-0 end-0 m-2 d-flex">
+                                <button class="btn btn-danger btn-sm me-2" wire:click="deleteReview({{ $review['id'] }})">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" wire:click="editReview({{ $review['id'] }})">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </div>
+                            @endif
+                            @endif
                             <div class="card-body d-flex flex-column justify-content-center">
                                 <img src="{{ $review['profile_picture'] ? ('/storage/' . $review['profile_picture']) : ('/storage/profile_pictures/default.png')}}"
                                     alt="Profile Picture"

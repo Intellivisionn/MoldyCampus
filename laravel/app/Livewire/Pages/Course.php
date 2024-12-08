@@ -26,8 +26,8 @@ class Course extends Component
 
         // Check if the user has already reviewed this course
         $this->review = CourseRating::where('course_id', $this->courseId)
-                                     ->where('user_id', auth()->id())
-                                     ->first();
+            ->where('user_id', auth()->id())
+            ->first();
 
         // If a review already exists, load its details
         if ($this->review) {
@@ -51,6 +51,7 @@ class Course extends Component
                 'review' => $review->review,
                 'student_name' => $review->user->name,
                 'profile_picture'  => $review->user->profile_picture,
+                'id' => $review->id,
             ];
         })->toArray() : []; //return reviews with names of the users
 
@@ -71,7 +72,8 @@ class Course extends Component
         ]);
     }
 
-    private function getReview() {
+    private function getReview()
+    {
         return CourseRating::where('user_id', Auth::id())->where('course_id', $this->courseId)->first();
     }
 
@@ -127,5 +129,20 @@ class Course extends Component
             $this->reviewText = '';
         }
         $this->closeModal();
+    }
+
+    public function deleteReview($reviewId)
+    {
+        $review = CourseRating::find($reviewId);
+        if ($review) {
+            $review->delete();
+            session()->flash('message', 'Review deleted successfully.');
+        }
+        $this->mount($this->courseId);
+    }
+
+    public function editReview($reviewId)
+    {
+        return redirect()->route('realadmin.editreview.show', ['reviewId' => $reviewId]);
     }
 }
