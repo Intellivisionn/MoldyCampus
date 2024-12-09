@@ -17,9 +17,9 @@ new #[Layout('layouts.app')] class extends Component {
 
         $this->form->authenticate();
 
-        Session::regenerate();
 
-        $this->redirectIntended(default: route('homepage', absolute: false), navigate: true);
+
+        $this->redirect(route('2fa-verify')); 
     }
 }; ?>
 <div class="flex flex-col items-center mb-4 mt-2 sm:justify-center sm:pt-0">

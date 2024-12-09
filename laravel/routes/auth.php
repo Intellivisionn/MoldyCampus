@@ -16,6 +16,9 @@ Route::middleware('guest')->group(function () {
 
     Volt::route('reset-password/{token}', 'pages.auth.reset-password')
         ->name('password.reset');
+
+    Volt::route('2fa', 'pages.auth.2fa')
+        ->name('2fa-verify');    
 });
 
 Route::middleware('auth')->group(function () {
