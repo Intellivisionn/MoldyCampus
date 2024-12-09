@@ -7,7 +7,7 @@ use App\Models\Course;
 use App\Models\Professor;
 use App\Models\CourseRating;
 
-class APIController
+class APIController extends Controller
 {
     public function getCourses(request $request)
     {
