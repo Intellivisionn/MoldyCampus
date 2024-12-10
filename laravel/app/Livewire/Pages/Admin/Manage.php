@@ -37,7 +37,7 @@ class Manage extends Component
             $professor->courses()->detach();
             $professor->delete();
     
-            session()->flash('message', 'Professor deleted successfully.');
+            session()->flash('message1', 'Professor deleted successfully.');
         } catch (\Exception $e) {
             session()->flash('error', 'Failed to delete professor: ' . $e->getMessage());
         }
