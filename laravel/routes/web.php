@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -61,5 +63,17 @@ Route::view('tos', 'pages.tos')
 
 Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
+
+Route::group(['middleware' => 'checkAdmin'], function () {
+    Route::get('admin', [AdminController::class, 'panel']);
+});
+
+Route::group(['middleware' => 'checkStaff'], function () {
+    Route::get('staff', [StaffController::class, 'panel']);
+});
+
+Route::get('unauthorized', function () {
+    return view('pages.unauthorized');
+})->name('unauthorized');
 
 require __DIR__.'/auth.php';
