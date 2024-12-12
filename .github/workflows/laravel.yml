@@ -73,5 +73,5 @@ jobs:
 
       - name: Run Pest tests
         run: |
-          cd MoldyCampus/laravel
+          cd laravel
           ./vendor/bin/pest
