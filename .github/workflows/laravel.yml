@@ -3,10 +3,10 @@ name: Laravel CI
 on:
   push:
     branches:
-      - Tests  # Trigger only on pushes to the 'develop' branch
+      - Tests  # Adjust to your branch name if it's not 'main'
   pull_request:
     branches:
-      - Tests  # Trigger only on pull requests targeting the 'develop' branch
+      - Tests  # Adjust to your branch name if it's not 'main'
 
 jobs:
   laravel-tests:
@@ -32,23 +32,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Navigate to Laravel project directory
-        run: cd laravel  # Replace with your actual fol
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-          extensions: mbstring, bcmath, pdo_pgsql
-          ini-values: post_max_size=256M, max_execution_time=300
-          coverage: none
+        working-directory: MoldyCampus/laravel
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        working-directory: MoldyCampus/laravel
+        run: composer install --prefer-dist --no-progress
 
       - name: Generate application key
+        working-directory: MoldyCampus/laravel
         run: php artisan key:generate
 
       - name: Set up environment
+        working-directory: MoldyCampus/laravel
         run: |
           cp .env.example .env
           php artisan config:cache
@@ -61,7 +56,9 @@ jobs:
           DB_PASSWORD: McYsc2PYCJ15Px
 
       - name: Run migrations
+        working-directory: MoldyCampus/laravel
         run: php artisan migrate --force
 
       - name: Run tests
+        working-directory: MoldyCampus/laravel
         run: vendor/bin/phpunit
