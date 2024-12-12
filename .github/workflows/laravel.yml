@@ -56,7 +56,7 @@ jobs:
 
       - name: Set up environment
         run: |
-          cd /laravel
+          cd laravel
           php artisan config:cache
         env:
           DB_CONNECTION: pgsql
