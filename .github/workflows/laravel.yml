@@ -31,6 +31,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Navigate to Laravel project directory
+        run: cd laravel  # Replace with your actual fol
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
