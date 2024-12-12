@@ -33,17 +33,17 @@ jobs:
 
       - name: Install Composer dependencies
         run: |
-          cd MoldyCampus/laravel
+          cd /laravel
           composer install --prefer-dist --no-progress
 
       - name: Generate application key
         run: |
-          cd MoldyCampus/laravel
+          cd /laravel
           php artisan key:generate
 
       - name: Set up environment
         run: |
-          cd MoldyCampus/laravel
+          cd /laravel
           cp .env.example .env
           php artisan config:cache
         env:
@@ -56,10 +56,10 @@ jobs:
 
       - name: Run migrations
         run: |
-          cd MoldyCampus/laravel
+          cd /laravel
           php artisan migrate --force
 
       - name: Run tests
         run: |
-          cd MoldyCampus/laravel
+          cd /laravel
           vendor/bin/phpunit
