@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Admin;
+namespace App\Livewire\Pages\Staff;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -46,6 +46,6 @@ class AddProfessor extends Component
 
     public function render()
     {
-        return view('livewire.pages.admin.add-professor');
+        return view('livewire.pages.staff.add-professor');
     }
 }

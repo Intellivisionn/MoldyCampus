@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Admin;
+namespace App\Livewire\Pages\Staff;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -58,7 +58,7 @@ class AddCourse extends Component
         $allCourses = Course::with('professors')->orderBy('name', 'asc')->get();
 
 
-        return view('livewire.pages.admin.add-course', [
+        return view('livewire.pages.staff.add-course', [
             'allProfessors' => $allProfessors,
         ]);
 

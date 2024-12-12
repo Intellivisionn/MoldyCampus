@@ -35,51 +35,49 @@ new class extends Component {
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
                     <li class="nav-item">
-                        @if (auth()->check() && auth()->user()->is_admin)
-                            <a class="nav-link" href="{{ route('admin') }}">Staff Panel</a>
-                        @endif
+                        <a class="nav-link" href="{{ route('staff') }}">Staff Panel</a>
                 </ul>
                 <form class="d-flex" action="{{ route('search.results') }}" method="GET">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
                         value="{{ old('query') }}">
                 </form>
                 @if (auth()->check())
-                    <!-- Settings Dropdown -->
-                    <div class="d-flex align-items-center ms-3">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <button class="btn btn-outline-secondary d-flex align-items-center">
-                                <img src="{{ auth()->user()->profile_picture ? ('/storage/' . auth()->user()->profile_picture) : ('/storage/profile_pictures/default.png')}}" 
-                                    alt="Profile Picture" 
-                                    class="rounded-circle" 
+                <!-- Settings Dropdown -->
+                <div class="d-flex align-items-center ms-3">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="btn btn-outline-secondary d-flex align-items-center">
+                                <img src="{{ auth()->user()->profile_picture ? ('/storage/' . auth()->user()->profile_picture) : ('/storage/profile_pictures/default.png')}}"
+                                    alt="Profile Picture"
+                                    class="rounded-circle"
                                     style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
-    
-                                    <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
-                                        x-on:profile-updated.window="name = $event.detail.name"></div>
-                                </button>
-                            </x-slot>
-    
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
-                                    {{ __('Profile') }}
+
+                                <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                                    x-on:profile-updated.window="name = $event.detail.name"></div>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile')" wire:navigate>
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+
+                            <!-- Authentication -->
+                            <button wire:click="logout" class="w-100 text-start">
+                                <x-dropdown-link>
+                                    {{ __('Log Out') }}
                                 </x-dropdown-link>
-    
-                                <!-- Authentication -->
-                                <button wire:click="logout" class="w-100 text-start">
-                                    <x-dropdown-link>
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </button>
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                            </button>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
                 @else
-                    <div class="d-flex">
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
-                        <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
-                    </div>
+                <div class="d-flex">
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
+                </div>
                 @endif
             </div>
         </div>
-    </header>    
+    </header>
 </nav>

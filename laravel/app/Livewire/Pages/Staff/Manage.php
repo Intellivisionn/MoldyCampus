@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Admin;
+namespace App\Livewire\Pages\Staff;
 
 use Livewire\Component;
 use App\Models\Course;
@@ -57,6 +57,6 @@ class Manage extends Component
             ->take(5)
             ->get();
 
-        return view('livewire.pages.admin.manage', compact('allCourses', 'allProfessors'));
+        return view('livewire.pages.staff.manage', compact('allCourses', 'allProfessors'));
     }
 }

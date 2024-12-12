@@ -18,20 +18,16 @@ Route::view('courses', 'pages.courses')->name('courses');
 
 Route::view('professors', 'pages.professors')->name('professors');
 
-Route::view('admin', 'pages.admin.admin')
-->middleware(['auth', 'can:access-admin'])
-->name('admin');
+Route::view('staff', 'pages.staff.staff')
+->name('staff');
 
-Route::view('addCourse', 'pages.admin.add-course')
-->middleware(['auth', 'can:access-admin'])
+Route::view('addCourse', 'pages.staff.add-course')
 ->name('addCourse');
 
-Route::view('addProfessor', 'pages.admin.add-professor')
-->middleware(['auth', 'can:access-admin'])
+Route::view('addProfessor', 'pages.staff.add-professor')
 ->name('addProfessor');
 
-Route::view('manage', 'pages.admin.manage')
-->middleware(['auth', 'can:access-admin'])
+Route::view('manage', 'pages.staff.manage')
 ->name('manage');
 
 Route::view('profile', 'pages.profile')
