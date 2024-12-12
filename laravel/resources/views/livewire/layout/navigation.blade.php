@@ -35,6 +35,18 @@ new class extends Component {
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
                 </ul>
+                @if (auth()->user() && auth()->user()->access_level >= 2)
+                    <ul class="mb-2 navbar-nav mx-3 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('staff.panel') }}">Staff</a>
+                        </li>
+                        @if (auth()->user()->access_level == 3)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.panel') }}">Admin</a>
+                            </li>
+                        @endif
+                    </ul>
+                @endif
                 <form class="d-flex" action="{{ route('search.results') }}" method="GET">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
                         value="{{ old('query') }}">

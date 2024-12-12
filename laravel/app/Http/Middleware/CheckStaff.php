@@ -10,7 +10,7 @@ class CheckStaff
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->is_staff) {
+        if (Auth::user() && Auth::user()->access_level >= 2) {
             return $next($request);
         } else {
             return redirect()->route('unauthorized');

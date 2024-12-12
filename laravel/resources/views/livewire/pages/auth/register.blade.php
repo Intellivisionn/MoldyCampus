@@ -23,9 +23,9 @@ new #[Layout('layouts.app')] class extends Component {
     public $majors = []; // Property to hold majors
 
     public function mount()
-{
-    $this->majors = Major::all();
-}
+    {
+        $this->majors = Major::all();
+    }
 
     public function register(): void
     {
@@ -42,6 +42,8 @@ new #[Layout('layouts.app')] class extends Component {
         if ($this->profile_picture) {
             $validated['profile_picture'] = $this->profile_picture->store('profile_pictures', 'public');
         }
+
+        $validated['access_level'] = 1;
 
         $user = User::create($validated);
 

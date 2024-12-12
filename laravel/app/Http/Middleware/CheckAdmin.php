@@ -10,7 +10,7 @@ class CheckAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->is_admin) {
+        if (Auth::user() && Auth::user()->access_level == 3) {
             return $next($request);
         } else {
             return redirect()->route('unauthorized');

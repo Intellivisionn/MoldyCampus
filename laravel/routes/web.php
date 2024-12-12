@@ -65,11 +65,11 @@ Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
 
 Route::group(['middleware' => 'checkAdmin'], function () {
-    Route::get('admin', [AdminController::class, 'panel']);
+    Route::view('admin', 'pages.admin.panel')->name('admin.panel');
 });
 
 Route::group(['middleware' => 'checkStaff'], function () {
-    Route::get('staff', [StaffController::class, 'panel']);
+    Route::view('staff', 'pages.staff.panel')->name('staff.panel');
 });
 
 Route::get('unauthorized', function () {
