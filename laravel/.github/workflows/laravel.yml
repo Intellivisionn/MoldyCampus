@@ -1,0 +1,64 @@
+name: Laravel CI
+
+on:
+  push:
+    branches:
+      - Tests  # Trigger only on pushes to the 'develop' branch
+  pull_request:
+    branches:
+      - Tests  # Trigger only on pull requests targeting the 'develop' branch
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: moldycampus
+          POSTGRES_PASSWORD: McYsc2PYCJ15Px
+          POSTGRES_DB: moldycampus
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U moldycampus"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: mbstring, bcmath, pdo_pgsql
+          ini-values: post_max_size=256M, max_execution_time=300
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Set up environment
+        run: |
+          cp .env.example .env
+          php artisan config:cache
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 5432
+          DB_DATABASE: moldycampus
+          DB_USERNAME: moldycampus
+          DB_PASSWORD: McYsc2PYCJ15Px
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: vendor/bin/phpunit
