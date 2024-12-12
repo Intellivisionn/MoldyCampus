@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
-use Livewire\Form;
+use Livewire\Form; 
 
 class LoginForm extends Form
 {

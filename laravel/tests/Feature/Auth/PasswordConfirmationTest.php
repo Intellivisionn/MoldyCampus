@@ -5,42 +5,45 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Livewire\Volt\Volt;
 
-test('confirm password screen can be rendered', function () {
-    $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->get('/confirm-password');
+// no confirm password screen in the app
 
-    $response
-        ->assertSeeVolt('pages.auth.confirm-password')
-        ->assertStatus(200);
-});
+// test('confirm password screen can be rendered', function () {
+//     $user = User::factory()->create();
 
-test('password can be confirmed', function () {
-    $user = User::factory()->create();
+//     $response = $this->actingAs($user)->get('/confirm-password');
 
-    $this->actingAs($user);
+//     $response
+//         ->assertSeeVolt('pages.auth.confirm-password')
+//         ->assertStatus(200);
+// });
 
-    $component = Volt::test('pages.auth.confirm-password')
-        ->set('password', 'password');
+// test('password can be confirmed', function () {
+//     $user = User::factory()->create();
 
-    $component->call('confirmPassword');
+//     $this->actingAs($user);
 
-    $component
-        ->assertRedirect('/dashboard')
-        ->assertHasNoErrors();
-});
+//     $component = Volt::test('pages.auth.confirm-password')
+//         ->set('password', 'password');
 
-test('password is not confirmed with invalid password', function () {
-    $user = User::factory()->create();
+//     $component->call('confirmPassword');
 
-    $this->actingAs($user);
+//     $component
+//         ->assertRedirect('/dashboard')
+//         ->assertHasNoErrors();
+// });
 
-    $component = Volt::test('pages.auth.confirm-password')
-        ->set('password', 'wrong-password');
+// test('password is not confirmed with invalid password', function () {
+//     $user = User::factory()->create();
 
-    $component->call('confirmPassword');
+//     $this->actingAs($user);
 
-    $component
-        ->assertNoRedirect()
-        ->assertHasErrors('password');
-});
+//     $component = Volt::test('pages.auth.confirm-password')
+//         ->set('password', 'wrong-password');
+
+//     $component->call('confirmPassword');
+
+//     $component
+//         ->assertNoRedirect()
+//         ->assertHasErrors('password');
+// });
