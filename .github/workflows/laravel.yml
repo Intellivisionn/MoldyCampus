@@ -71,7 +71,7 @@ jobs:
           cd laravel
           php artisan migrate --force
 
-      - name: Run tests
+      - name: Run Pest tests
         run: |
-          cd laravel
-          vendor/bin/phpunit
+          cd MoldyCampus/laravel
+          ./vendor/bin/pest
