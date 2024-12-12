@@ -19,7 +19,6 @@ Route::view('courses', 'pages.courses')->name('courses');
 Route::view('professors', 'pages.professors')->name('professors');
 
 Route::view('realadmin', 'pages.realadmin.realadmin')
-    ->middleware(['auth', 'can:access-realadmin'])
     ->name('realadmin');
 
 // routes for Jakub Potocky's extension

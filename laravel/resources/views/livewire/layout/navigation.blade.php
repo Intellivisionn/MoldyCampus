@@ -35,14 +35,10 @@ new class extends Component {
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
                     <li class="nav-item">
-                        @if (auth()->check() && auth()->user()->is_admin)
                             <a class="nav-link" href="{{ route('admin') }}">Staff Panel</a>
-                        @endif
                     </li>
                     <li class="nav-item">
-                        @if (auth()->check() && auth()->user()->realadmin )
                             <a class="nav-link" href="{{ route('realadmin') }}">Admin</a>
-                        @endif
                     </li>
                             
                 </ul>
