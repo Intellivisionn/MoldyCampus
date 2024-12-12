@@ -31,20 +31,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Navigate to Laravel project directory
-        working-directory: MoldyCampus/laravel
-
       - name: Install Composer dependencies
-        working-directory: MoldyCampus/laravel
-        run: composer install --prefer-dist --no-progress
+        run: |
+          cd MoldyCampus/laravel
+          composer install --prefer-dist --no-progress
 
       - name: Generate application key
-        working-directory: MoldyCampus/laravel
-        run: php artisan key:generate
+        run: |
+          cd MoldyCampus/laravel
+          php artisan key:generate
 
       - name: Set up environment
-        working-directory: MoldyCampus/laravel
         run: |
+          cd MoldyCampus/laravel
           cp .env.example .env
           php artisan config:cache
         env:
@@ -56,9 +55,11 @@ jobs:
           DB_PASSWORD: McYsc2PYCJ15Px
 
       - name: Run migrations
-        working-directory: MoldyCampus/laravel
-        run: php artisan migrate --force
+        run: |
+          cd MoldyCampus/laravel
+          php artisan migrate --force
 
       - name: Run tests
-        working-directory: MoldyCampus/laravel
-        run: vendor/bin/phpunit
+        run: |
+          cd MoldyCampus/laravel
+          vendor/bin/phpunit
