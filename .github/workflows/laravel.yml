@@ -31,10 +31,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2  # Specify PHP 8.2
+          extensions: mbstring, bcmath, pdo_pgsql
+          ini-values: post_max_size=256M, max_execution_time=300
+          coverage: none
+
       - name: Install Composer dependencies
         run: |
           cd laravel
           composer install --prefer-dist --no-progress
+
+      - name: Create .env file
+        run: |
+          cd laravel
+          cp .env.example .env
 
       - name: Generate application key
         run: |
@@ -43,8 +56,7 @@ jobs:
 
       - name: Set up environment
         run: |
-          cd laravel
-          cp .env.example .env
+          cd /laravel
           php artisan config:cache
         env:
           DB_CONNECTION: pgsql
