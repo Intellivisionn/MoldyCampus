@@ -35,12 +35,12 @@ new class extends Component {
                         <a class="nav-link" href="{{ route('professors') }}">Professors</a>
                     </li>
                 </ul>
-                @if (auth()->user() && auth()->user()->access_level >= 2)
+                @if (auth()->user() && auth()->user()->access_level >= 2) // Displays control panels only if user access is staff or admin
                     <ul class="mb-2 navbar-nav mx-3 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('staff.panel') }}">Staff</a>
                         </li>
-                        @if (auth()->user()->access_level == 3)
+                        @if (auth()->user()->access_level == 3) // Displays admin panel only if user access is admin
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.panel') }}">Admin</a>
                             </li>

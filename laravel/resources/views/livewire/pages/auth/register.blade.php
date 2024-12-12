@@ -43,7 +43,7 @@ new #[Layout('layouts.app')] class extends Component {
             $validated['profile_picture'] = $this->profile_picture->store('profile_pictures', 'public');
         }
 
-        $validated['access_level'] = 1;
+        $validated['access_level'] = 1; // Initially user access level gets set to 1 - student
 
         $user = User::create($validated);
 

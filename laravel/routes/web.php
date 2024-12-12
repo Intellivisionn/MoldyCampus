@@ -64,16 +64,20 @@ Route::view('tos', 'pages.tos')
 Route::view('contact_us', 'pages.contact_us')
     ->name('contact_us');
 
-Route::group(['middleware' => 'checkAdmin'], function () {
+/* Admin and Staff Routes */
+
+Route::group(['middleware' => 'checkAdmin'], function () { // In this group all the admin panel related routes will be defined
     Route::view('admin', 'pages.admin.panel')->name('admin.panel');
 });
 
-Route::group(['middleware' => 'checkStaff'], function () {
+Route::group(['middleware' => 'checkStaff'], function () { // In this group all the staff panel related routes will be defined
     Route::view('staff', 'pages.staff.panel')->name('staff.panel');
 });
 
-Route::get('unauthorized', function () {
+Route::get('unauthorized', function () { // This route will be used to show the unauthorized page whenever a user tries to access a page that they are not authorized to access
     return view('pages.unauthorized');
 })->name('unauthorized');
+
+/* End of Admin and Staff Routes */
 
 require __DIR__.'/auth.php';

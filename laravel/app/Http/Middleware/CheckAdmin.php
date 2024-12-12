@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckAdmin
 {
-    public function handle(Request $request, Closure $next)
+    // This middleware checks if the user is an admin by checking its access level in the database. 
+    // If the user is an admin, the request is passed to the next step.
+    // If the user is not an admin, the user is redirected to the unauthorized route.
+    public function handle(Request $request, Closure $next) 
     {
         if (Auth::user() && Auth::user()->access_level == 3) {
             return $next($request);
