@@ -10,7 +10,9 @@ class ProfessorPageTest extends TestCase
 {
     public function test_mount_initializes_correctly()
     {
-        $professor = Professor::factory()->create();
+        // Assume that the database seeding ensures at least one professor exists with ID 1
+        $professor = Professor::find(1);
+        $this->assertNotNull($professor, 'No seeded professor found with ID 1.');
 
         Livewire::test(\App\Livewire\Pages\Professor::class, ['professorId' => $professor->id])
             ->assertSet('professorId', $professor->id);
