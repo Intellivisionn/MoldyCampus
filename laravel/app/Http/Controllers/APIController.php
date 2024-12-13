@@ -7,7 +7,7 @@ use App\Models\CourseRating;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 
-class APIController extends Controller
+class APIController
 {
     // Method to get all courses with their respective professors and ratings
     public function getCourses(Request $request)
@@ -72,10 +72,47 @@ class APIController extends Controller
     // Method to update user profile
     public function updateUserProfile(Request $request)
     {
-        $request->validate([
-            'userId' => 'required|integer',
-        ]);
+        // Log the attempt to update user profile
+        error_log('Updating user profile: '.json_encode($request->all()));
 
-        // Add logic to update user profile here later
+        try {
+            // Validate the request
+            $request->validate([
+                'name' => 'sometimes|string|max:255',
+                'email' => 'sometimes|email|max:255',
+                'password' => 'sometimes|string|min:8|confirmed',
+            ]);
+
+            // Log after validation
+            error_log('User profile validated');
+
+            // Get the authenticated user
+            $user = $request->user();
+            if (! $user) {
+                throw new \Exception('Authenticated user not found');
+            }
+
+            // Update user details
+            if ($request->has('name')) {
+                $user->name = $request->input('name');
+            }
+            if ($request->has('email')) {
+                $user->email = $request->input('email');
+            }
+            if ($request->has('password')) {
+                $user->password = bcrypt($request->input('password'));
+            }
+
+            // Save the updated user
+            $user->save();
+            error_log('User profile updated successfully: '.json_encode(['userId' => $user->id]));
+
+            return response()->json(['message' => 'User profile updated successfully']);
+        } catch (\Exception $e) {
+            // Log any exceptions
+            error_log('Error updating user profile: '.$e->getMessage());
+
+            return response()->json(['error' => 'Failed to update user profile', 'message' => $e->getMessage()], 500);
+        }
     }
 }

@@ -19,54 +19,74 @@ use Illuminate\Validation\ValidationException; // ValidationException class
 // providing the benefit of a terse, expressive syntax while maintaining more
 // testability and flexibility than traditional static methods.
 
-class AuthAPIController extends Controller
+class AuthAPIController
 {
     // Login method
     public function login(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember' => 'boolean',
-        ]);
+        // Log the attempt to log in
+        error_log('Attempting to log in user: '.$request->input('email'));
 
-        // Generate a throttle key for rate limiting
-        $throttleKey = Str::transliterate(Str::lower($request->input('email')).'|'.$request->ip());
-
-        // Check if the user has too many login attempts
-        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
-            event(new Lockout($request));
-
-            $seconds = RateLimiter::availableIn($throttleKey);
-
-            throw ValidationException::withMessages([
-                'email' => trans('auth.throttle', [
-                    'seconds' => $seconds,
-                    'minutes' => ceil($seconds / 60),
-                ]),
+        try {
+            // Validate the request
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
             ]);
-        }
 
-        // Attempt to authenticate the user
-        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            RateLimiter::hit($throttleKey);
+            // Log after validation
+            error_log('Validation passed for user: '.$request->input('email'));
 
-            throw ValidationException::withMessages([
-                'email' => [trans('auth.failed')],
+            // Generate a throttle key for rate limiting
+            $throttleKey = Str::transliterate(Str::lower($request->input('email')).'|'.$request->ip());
+
+            // Check if the user has too many login attempts
+            if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+                event(new Lockout($request));
+
+                $seconds = RateLimiter::availableIn($throttleKey);
+
+                throw ValidationException::withMessages([
+                    'email' => trans('auth.throttle', [
+                        'seconds' => $seconds,
+                        'minutes' => ceil($seconds / 60),
+                    ]),
+                ]);
+            }
+
+            // Attempt to authenticate the user
+            if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+                RateLimiter::hit($throttleKey);
+
+                throw ValidationException::withMessages([
+                    'email' => [trans('auth.failed')],
+                ]);
+            }
+
+            // Clear the rate limiter
+            RateLimiter::clear($throttleKey);
+
+            // Regenerate the session ID to prevent session fixation attacks
+            Session::regenerate();
+
+            // Issue a token to the authenticated user
+            $user = Auth::user();
+            $token = $user->createToken('API Token')->plainTextToken;
+
+            // Log successful login
+            error_log('User logged in successfully: '.$request->input('email'));
+
+            return response()->json([
+                'message' => 'Login successful',
+                'user' => $user,
+                'token' => $token,
             ]);
+        } catch (\Exception $e) {
+            // Log any exceptions
+            error_log('Error logging in user: '.$request->input('email').' - '.$e->getMessage());
+
+            return response()->json(['error' => 'Login failed', 'message' => $e->getMessage()], 500);
         }
-
-        // Clear the rate limiter
-        RateLimiter::clear($throttleKey);
-
-        // Regenerate the session ID to prevent session fixation attacks
-        Session::regenerate();
-
-        return response()->json([
-            'message' => 'Login successful',
-            'user' => Auth::user(),
-        ]);
     }
 
     // Register method
@@ -87,7 +107,7 @@ class AuthAPIController extends Controller
 
         // Handle profile picture upload if provided
         if ($request->hasFile('profile_picture')) {
-            $data['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public'); // store in storage/app/public/profile_pictures, im not sure if this is the correct path and will work, needs testing
+            $data['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public'); // store in storage/app/public/profile_pictures
         }
 
         // Create the new user
@@ -99,9 +119,13 @@ class AuthAPIController extends Controller
         // Log in the newly registered user
         Auth::login($user);
 
+        // Issue a token to the newly registered user
+        $token = $user->createToken('API Token')->plainTextToken;
+
         return response()->json([
             'message' => 'Registration successful',
             'user' => $user,
+            'token' => $token,
         ], 201);
     }
 

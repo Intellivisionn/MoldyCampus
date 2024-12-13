@@ -11,7 +11,11 @@ Route::post('reset-password', [AuthAPIController::class, 'resetPassword']);
 Route::post('logout', [AuthAPIController::class, 'logout']);
 
 //Courses Routes
-Route::post('courses', [APIController::class, 'getCourses']);
-Route::post('course', [APIController::class, 'getIndividualCourse']);
-Route::post('professors', [APIController::class, 'getProfessors']);
-Route::post('professor', [APIController::class, 'getIndividualProfessor']);
+Route::get('courses', [APIController::class, 'getCourses']);
+Route::get('course', [APIController::class, 'getIndividualCourse']);
+Route::get('professors', [APIController::class, 'getProfessors']);
+Route::get('professor', [APIController::class, 'getIndividualProfessor']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('updateUserProfile', [APIController::class, 'updateUserProfile']);
+});
