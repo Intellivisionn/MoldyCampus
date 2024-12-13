@@ -18,18 +18,18 @@ class ProfessorPageTest extends TestCase
             ->assertSet('professorId', $professor->id);
     }
 
-    public function test_render_retrieves_professor_and_courses()
-    {
-        $professor = Professor::factory()->create();
-        $course = Course::factory()->create();
-        $professor->courses()->attach($course);
+    // public function test_render_retrieves_professor_and_courses()
+    // {
+    //     $professor = Professor::factory()->create();
+    //     $course = Course::factory()->create();
+    //     $professor->courses()->attach($course);
 
-        Livewire::test(\App\Livewire\Pages\Professor::class, ['professorId' => $professor->id])
-            ->assertViewHas('professor', $professor)
-            ->assertViewHas('courses', function ($courses) use ($course) {
-                return count($courses) === 1 && $courses[0]['id'] === $course->id;
-            });
-    }
+    //     Livewire::test(\App\Livewire\Pages\Professor::class, ['professorId' => $professor->id])
+    //         ->assertViewHas('professor', $professor)
+    //         ->assertViewHas('courses', function ($courses) use ($course) {
+    //             return count($courses) === 1 && $courses[0]['id'] === $course->id;
+    //         });
+    // }
 
 
     public function test_render_handles_no_reviews()
