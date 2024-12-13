@@ -70,6 +70,7 @@ jobs:
         run: |
           cd laravel
           php artisan migrate --force
+          php artisan db:seed 
 
       - name: Run PHPUnit tests
         run: |
