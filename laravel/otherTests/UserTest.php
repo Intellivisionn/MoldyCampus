@@ -15,7 +15,6 @@ class UserTest extends TestCase
         $response = $this->actingAs($user)->get('profile');
 
         $response->assertStatus(200);
-
         
     }
 }
