@@ -96,7 +96,6 @@
                                 @endfor
                                 {{ $finalRating }} / 5
                             </h4>
-                            <h4>#143</h4>
                         </div>
                         <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
                             <p class="mb-0">Course material&emsp;
