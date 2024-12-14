@@ -16,19 +16,33 @@ class APIController
         error_log('Fetching all courses with their respective professors and ratings');
 
         try {
-            $allCourses = [];
-            $course = Course::all();
-            foreach ($course as $c) {
-                // Get the professor for the course
-                $c->professor = Professor::find($c->professor_id);
+            $courses = Course::with('professors', 'reviews')->get();
+            $allCourses = $courses->map(function ($course) {
                 // Get the ratings for the course
-                $c->ratings = CourseRating::where('course_id', $c->id)->get();
-                $allCourses[] = [
-                    'course' => $c,
-                    'professor' => $c->professor,
-                    'ratings' => $c->ratings,
+                $ratings = $course->reviews;
+
+                return [
+                    'courseinfo' => [
+                        'id' => $course->id,
+                        'name' => $course->name,
+                        'description' => $course->description,
+                        'credits' => $course->credits,
+                    ],
+                    'professors' => $course->professors->map(function ($professor) {
+                        return [
+                            'id' => $professor->id,
+                            'name' => $professor->name,
+                            'department' => $professor->department,
+                        ];
+                    }),
+                    'ratings' => $ratings->map(fn ($rating) => [
+                        'id' => $rating->id,
+                        'rating' => $rating->rating,
+                        'comment' => $rating->comment,
+                        'user_id' => $rating->user_id,
+                    ]),
                 ];
-            }
+            });
 
             // Log the successful retrieval
             error_log('Courses fetched successfully');
@@ -49,16 +63,47 @@ class APIController
         error_log('Fetching all professors with their respective ratings');
 
         try {
-            $professor = Professor::all();
-            foreach ($professor as $p) {
-                // Get the ratings for the professor
-                $p->ratings = CourseRating::where('professor_id', $p->id)->get();
+            $professors = Professor::all();
+            $allProfessors = [];
+            foreach ($professors as $professor) {
+                // Initialize an empty collection for ratings
+                $professor->ratings = collect();
+                $professor->courses = $professor->courses ?? collect();
+
+                // Loop through the courses associated with the professor
+                foreach ($professor->courses as $course) {
+                    // Get the ratings for the course
+                    $courseRatings = CourseRating::where('course_id', $course->id)->get();
+
+                    // Merge the course ratings into the professor's ratings collection
+                    $professor->ratings = $professor->ratings->merge($courseRatings);
+                }
+
+                $allProfessors[] = [
+                    'professor' => [
+                        'id' => $professor->id,
+                        'name' => $professor->name,
+                        'department' => $professor->department,
+                    ],
+                    'courses' => $professor->courses->map(fn ($course) => [
+                        'id' => $course->id,
+                        'name' => $course->name,
+                        'description' => $course->description,
+                        'credits' => $course->credits,
+                    ]),
+                    'ratings' => $professor->ratings->map(fn ($rating) => [
+                        'id' => $rating->id,
+                        'rating' => $rating->rating,
+                        'comment' => $rating->comment,
+                        'user_id' => $rating->user_id,
+                    ]),
+                ];
             }
 
             // Log the successful retrieval
             error_log('Professors fetched successfully');
 
-            return response()->json($professor);
+            return response()->json($allProfessors);
         } catch (\Exception $e) {
             // Log any exceptions
             error_log('Error fetching professors: '.$e->getMessage());
@@ -249,7 +294,7 @@ class APIController
             // Get the authenticated user
             $user = $request->user();
             if (! $user) {
-                throw new \Exception('Authenticated user not found');
+                return response()->json(['error' => 'Authenticated user not found'], 401);
             }
 
             // Create the review
@@ -257,7 +302,7 @@ class APIController
                 'user_id' => $user->id,
                 'course_id' => $request->input('course_id'),
                 'rating' => $request->input('rating'),
-                'comment' => $request->input('comment'),
+                'review' => $request->input('review'),
             ]);
 
             // Log the successful review creation
