@@ -13,7 +13,9 @@ class Courses extends Component
 
     public function nextPage()
     {
-        if ($this->currentPage < $this->getCourses()->lastPage()) {
+        $lastPage = $this->getLastPage();
+
+        if ($this->currentPage < $lastPage) {
             $this->currentPage++;
         }
     }
@@ -27,6 +29,8 @@ class Courses extends Component
 
     public function render()
     {
+        $this->currentPage = min($this->currentPage, $this->getLastPage()); // Ensure currentPage does not exceed lastPage
+
         $courses = $this->getCourses();
 
         return view('livewire.pages.courses', [
@@ -39,5 +43,11 @@ class Courses extends Component
     {
         return Course::orderBy('name', 'asc')
             ->paginate($this->itemsPerPage, ['*'], 'page', $this->currentPage);
+    }
+
+    private function getLastPage()
+    {
+        // Temporarily get the last page from the query.
+        return Course::paginate($this->itemsPerPage)->lastPage();
     }
 }

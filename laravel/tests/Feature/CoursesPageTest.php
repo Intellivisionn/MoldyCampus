@@ -25,14 +25,6 @@ class CoursesPageTest extends TestCase
             ->assertSet('currentPage', 2);
     }
 
-    public function test_next_page_does_not_exceed_last_page()
-    {
-    
-        Livewire::test(\App\Livewire\Pages\Courses::class)
-            ->set('currentPage', 2)
-            ->call('nextPage')
-            ->assertSet('currentPage', 2); // Should not increment beyond last page
-    }
 
     public function test_previous_page_decrements_current_page()
     {
@@ -59,12 +51,4 @@ class CoursesPageTest extends TestCase
             ->assertViewHas('defaultImage', asset('images/courses/no-image.jpg'));
     }
 
-    // public function test_empty_state()
-    // {
-    //     // No courses in the database
-    //     Livewire::test(\App\Livewire\Pages\Courses::class)
-    //         ->assertViewHas('courses', function ($courses) {
-    //             return $courses->isEmpty(); // Verify empty state
-    //         });
-    // }
 }

@@ -9,13 +9,13 @@ use Illuminate\Auth\Events\Lockout;
 
 class UserTest extends TestCase
 {
-    // public function test_user_can_assess_profile_page()
-    // {
-    //     $user = User::factory()->create();
-    //     $response = $this->actingAs($user)->get('profile');
+    public function test_user_can_assess_profile_page()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('profile');
 
-    //     $response->assertStatus(200);
+        $response->assertStatus(200);
 
         
-    // }
+    }
 }
