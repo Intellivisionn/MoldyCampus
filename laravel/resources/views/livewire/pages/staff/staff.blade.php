@@ -47,7 +47,7 @@
             </div>
             <div class="flex-1 p-4 bg-white shadow sm:p-8 sm:rounded-lg max-w-sm">
                 <div class="flex items-center justify-between">
-                    <h4>Total Lecturers</h4>
+                    <h4>Total Professors</h4>
                     <span class="text-2xl font-bold">{{ $professorCount }}</span>
                 </div>
             </div>
