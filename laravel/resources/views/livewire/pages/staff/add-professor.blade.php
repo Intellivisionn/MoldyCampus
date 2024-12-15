@@ -29,11 +29,6 @@
         </div>
 
         <div class="mb-3">
-            <label for="name" class="form-label">E-mail</label>
-           <!-- <input type="text" class="form-control" id="name" name="name" required> -->
-        </div>
-
-        <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea wire:model="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="4" required></textarea>
             @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
