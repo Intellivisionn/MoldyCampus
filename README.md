@@ -19,7 +19,7 @@ MoldyCampus aims to provide students with a platform to rate and review universi
 
 - **Framework**: Laravel
 - **Database**: PostgreSQL
-- **Starter Kit**: Laravel Jetstream
+- **Starter Kit**: Laravel Breeze
 
 ## Installation
 
