@@ -95,15 +95,14 @@
 
                                 @for ($i = 0; $i < 5 - floor($finalRating); $i++)
                                     <i class="fa-regular fa-star"></i>
-                                    @endfor
-                                    {{ $finalRating }} / 5
-                        </h4>
-                        <h4>#143</h4>
-                    </div>
-                    <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
-                        <p class="mb-0">Course material&emsp;
-                            @for ($i = 0; $i < floor($finalRating); $i++)
-                                <i class="fa-solid fa-star"></i>
+                                @endfor
+                                {{ $finalRating }} / 5
+                            </h4>
+                        </div>
+                        <div class="d-flex flex-grow-1 justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Course material&emsp;
+                                @for ($i = 0; $i < floor($finalRating); $i++)
+                                    <i class="fa-solid fa-star"></i>
                                 @endfor
 
                                 @for ($i = 0; $i < 5 - floor($finalRating); $i++)
