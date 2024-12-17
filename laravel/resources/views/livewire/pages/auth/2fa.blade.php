@@ -26,7 +26,7 @@ new #[Layout('layouts.app')] class extends Component {
             'two_factor_code' => ['required', 'digits:6', 'numeric'],
         ]);
 
-        $maxAttempts = 3;
+        $maxAttempts = 2;
         $attempts = session()->get('2fa_attempts', $maxAttempts);
 
         if ($attempts <= 0) {
@@ -57,8 +57,8 @@ new #[Layout('layouts.app')] class extends Component {
         else
         {
             
-            session()->flash('message','You still have ' . $attempts . ' attempts' );
             session()->put('2fa_attempts', $attempts - 1);
+            session()->flash('message','You still have ' . $attempts . ' attempts' );
             throw ValidationException::withMessages([
                 'two_factor_code' => __('The provided code is invalid or has expired.'),
             ]);
