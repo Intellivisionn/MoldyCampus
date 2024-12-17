@@ -21,6 +21,7 @@
             @endif
 
             <div class="mt-4">
+                <!-- Search Input -->
                 <input
                     type="text"
                     id="courseSearch"
@@ -92,6 +93,7 @@
 </div>
 
 <script>
+    // Filter courses and professors
     function filterCourses() {
         const searchInput = document.getElementById('courseSearch').value.toLowerCase();
         const courseList = document.getElementById('courseList');

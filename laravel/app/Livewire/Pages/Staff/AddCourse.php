@@ -28,14 +28,17 @@ class AddCourse extends Component
 
     public function submit()
 {
+    // Validate inputs
     $this->validate();
 
+    // Store image
     if ($this->course_picture) {
         $imagePath = $this->course_picture->store('images/courses', 'public');
     } else {
         $imagePath = null;
     }
 
+    // Create course
     $course = Course::create([
         'name' => $this->name,
         'code' => $this->code,
@@ -43,10 +46,12 @@ class AddCourse extends Component
         'image_path' => $imagePath,
     ]);
 
+    // Attach professors
     if (!empty($this->selectedProfessors)) {
         $course->professors()->attach($this->selectedProfessors);
     }
 
+    // Reset form
     $this->reset();
 
     session()->flash('message', 'Course added successfully.');
@@ -54,8 +59,8 @@ class AddCourse extends Component
 
     public function render()
     {
+        // Get all professors for search
         $allProfessors = Professor::orderBy('name', 'asc')->get();
-        $allCourses = Course::with('professors')->orderBy('name', 'asc')->get();
 
 
         return view('livewire.pages.staff.add-course', [

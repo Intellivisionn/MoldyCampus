@@ -16,6 +16,7 @@ class Staff extends Component
 
     public function mount()
     {
+        // Fetch user, course, and professor count
         $this->userCount = User::count();
         $this->courseCount = Course::count();
         $this->professorCount = Professor::count();

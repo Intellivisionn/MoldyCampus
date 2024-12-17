@@ -24,14 +24,17 @@ class AddProfessor extends Component
 
     public function submit()
     {
+        // Validate inputs
         $this->validate();
 
+        // Store image
         if ($this->image_path) {
             $imagePath = $this->image_path->store('images/professors', 'public');
         } else {
             $imagePath = null;
         }
 
+        // Create professor
         Professor::create([
             'name' => $this->name,
             'title' => $this->title,
@@ -39,6 +42,7 @@ class AddProfessor extends Component
             'image_path' => $imagePath,
         ]);
 
+        // Reset form
         $this->reset();
 
         session()->flash('message', 'Professor added successfully.');

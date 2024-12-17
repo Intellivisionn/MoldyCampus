@@ -14,13 +14,16 @@ class Manage extends Component
 
     public function deleteCourse($courseId)
     {
+        // Delete course
         try {
+            // Fetch and delete course image if exists
             $course = Course::findOrFail($courseId);
 
             if ($course->image_path && Storage::disk('public')->exists($course->image_path)) {
                 Storage::disk('public')->delete($course->image_path);
             }
-
+            
+            // Detach professors
             $course->professors()->detach();
             $course->delete();
 
@@ -32,6 +35,7 @@ class Manage extends Component
 
     public function deleteProfessor($professorId)
     {
+        // Delete professor
         try {
             $professor = Professor::findOrFail($professorId);
             $professor->courses()->detach();
@@ -46,6 +50,7 @@ class Manage extends Component
 
     public function render()
     {
+        // Fetch courses and professors
         $allCourses = Course::with('professors')
             ->where('name', 'like', '%' . $this->search . '%')
             ->orderBy('name', 'asc')
