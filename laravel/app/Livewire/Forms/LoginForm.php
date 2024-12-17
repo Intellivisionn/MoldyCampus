@@ -45,11 +45,15 @@ class LoginForm extends Form
             // Send the 2FA code to the user's email
             Mail::to($user->email)->send(new TwoFactorCodeMail($user->two_factor_code));
             
-            
+            session()->put('user_email', $user->email);
             // Log the user out temporarily
             Auth::logout();
             
             // Redirect the user to a page where they can enter the 2FA code
+            if(session()->get('2fa_attempts') == -1)
+            {
+                session()->put('2fa_attempts',  2);
+            }
             session()->flash('message', 'We sent you a 2FA code. Please check your email.');
             
         }else {

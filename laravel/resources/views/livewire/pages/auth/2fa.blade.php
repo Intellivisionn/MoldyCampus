@@ -10,6 +10,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\ValidationException;
+use App\Mail\AttemptedLoginMail;
+use Illuminate\Support\Facades\Mail; 
 
 new #[Layout('layouts.app')] class extends Component {
     use WithFileUploads;
@@ -18,29 +20,45 @@ new #[Layout('layouts.app')] class extends Component {
     
     public function verify(): void
     {
+        
+
         $validated = $this->validate([
             'two_factor_code' => ['required', 'digits:6', 'numeric'],
         ]);
+
+        $maxAttempts = 3;
+        $attempts = session()->get('2fa_attempts', $maxAttempts);
+
+        if ($attempts <= 0) {
+            $user_email = session()->get('user_email');
+            if ($user_email != null) {
+                Mail::to($user_email)->send(new AttemptedLoginMail());
+            }
+            $this->redirect(route('login', absolute: false), navigate: true);
+        }
 
         $user = User::where('two_factor_code', $this->two_factor_code)
                     ->where('two_factor_expires_at', '>', now())
                     ->first();
 
         if ($user) {
-            // Clear the 2FA code and log the user in
             $user->update([
                 'two_factor_code' => null,
                 'two_factor_expires_at' => null,
             ]);
-
+            
             Auth::login($user);
-            Session::regenerate();
+            session()->regenerate();
+            session()->forget('2fa_attempts');
 
 
             $this->redirect(route('homepage', absolute: false), navigate: true);
         }
         else
         {
+            
+            session()->flash('message','You still have ' . $attempts . ' attempts' );
+            session()->put('2fa_attempts', $attempts - 1);
             throw ValidationException::withMessages([
                 'two_factor_code' => __('The provided code is invalid or has expired.'),
             ]);
@@ -56,7 +74,7 @@ new #[Layout('layouts.app')] class extends Component {
             <p class="text-green-600 text-sm mb-4">{{ session('message') }}</p>
         @endif
 
-        <form wire:submit="verify">
+        <form wire:submit.prevent="verify">
             
             <!-- Authentication Code -->
             <div>
